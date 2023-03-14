@@ -1,0 +1,32 @@
+.Main__Container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .Main__Title {
+    font-size: 5.5rem;
+  }
+
+  > div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.25rem;
+    > button {
+      text-align: center;
+      font-size: 1.25rem;
+      padding: 0.95rem;
+      outline: none;
+      border: none;
+      background-color: black;
+      color: white;
+      transition: 0.5s ease;
+      border-radius: 0.25rem;
+      &:hover {
+        background-color: wheat;
+        color: black;
+      }
+    }
+  }
+}
