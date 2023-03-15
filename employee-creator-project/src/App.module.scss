@@ -1,0 +1,12 @@
+@import "./theme.scss";
+
+.Header__Container {
+  height: 30vh;
+  width: 100vw;
+  background-color: $main_color;
+  > h1 {
+    padding: 6rem;
+    font-size: 2.5rem;
+    color: #3c3e45;
+  }
+}

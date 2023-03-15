@@ -1,0 +1,76 @@
+@import "../../theme.scss";
+
+.EmployeeList__GridContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 4.5rem;
+  .EmployeeList__Grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 70%;
+
+    .EmployeeList__Top {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      > p {
+        font-size: 1.075rem;
+        margin-left: 2.5rem;
+      }
+
+      .EmployeeList__Button {
+        background-color: $secondary_color;
+        padding: 1rem 2.75rem;
+        border: none;
+        border-radius: 0.5rem;
+        color: white;
+        transition: 0.5s ease;
+
+        &:hover {
+          transform: scale(1.025);
+        }
+      }
+    }
+  }
+}
+.EmployeeList__Wrapper {
+  margin: auto;
+  padding-top: 4rem;
+}
+.EmployeeCard__Container {
+  width: 50vw;
+
+  .EmployeeCard__Grid {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.175rem solid $border_color;
+    padding: 1.25rem;
+    .EmployeeCard__Text {
+      > p {
+        padding: 0.5rem 0;
+      }
+    }
+    .EmployeeCard__Options {
+      display: flex;
+      > a {
+        padding: 0rem 0.25rem;
+        text-decoration: underline;
+        color: $link_color;
+      }
+      > p {
+        padding: 0rem 0.25rem;
+        text-decoration: underline;
+        color: $link_color;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.divider {
+  color: #d3d2d7 !important;
+}

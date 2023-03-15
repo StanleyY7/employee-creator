@@ -13,10 +13,12 @@
     display: flex;
     justify-content: center;
     padding-top: 0.25rem;
-    > button {
+
+    .Main__Button {
       text-align: center;
       font-size: 1.25rem;
       padding: 0.95rem;
+      margin-top: 2.5rem;
       outline: none;
       border: none;
       background-color: black;

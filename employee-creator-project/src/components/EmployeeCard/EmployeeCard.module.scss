@@ -1,0 +1,38 @@
+@import "../../theme.scss";
+
+.EmployeeCard__Container {
+  width: 50vw;
+
+  .EmployeeCard__Grid {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.175rem solid $border_color;
+    padding: 1.25rem;
+    .EmployeeCard__Text {
+      > p {
+        padding: 0.5rem 0;
+      }
+    }
+    .EmployeeCard__Options {
+      display: flex;
+      > a {
+        padding: 0rem 0.25rem;
+        text-decoration: underline;
+        color: $link_color;
+      }
+      > p {
+        padding: 0rem 0.25rem;
+        text-decoration: underline;
+        color: $link_color;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.divider {
+  color: #d3d2d7 !important;
+}
