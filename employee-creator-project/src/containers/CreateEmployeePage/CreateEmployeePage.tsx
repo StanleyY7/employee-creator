@@ -1,13 +1,14 @@
 import generalStyles from "../../App.module.scss";
 import styles from "./CreateEmployeePage.module.scss";
 import Form from "../../components/Form/Form";
-
+import BackButton from "../../components/BackButton/BackButton";
 const CreateEmployeePage = () => {
   return (
     <>
       <div>
         <section>
           <div className={generalStyles.Header__Container}>
+            <BackButton />
             <h1>Employee Creation</h1>
           </div>
           <div className={styles.CreateEmployeePage__Grid}>

@@ -1,10 +1,13 @@
 import styles from "./EmployeeCard.module.scss";
 import { deleteById } from "../../services/employee";
+import { getYearsDifference } from "../../services/general";
+
 const EmployeeCard = ({ employee, filterRemove }: any) => {
   const handleRemove = () => {
     deleteById(employee.id);
     filterRemove(employee.id);
   };
+
   return (
     <>
       <div key={employee.id} className={styles.EmployeeCard__Container}>
@@ -13,7 +16,10 @@ const EmployeeCard = ({ employee, filterRemove }: any) => {
             <p>
               <strong>{`${employee.firstName} ${employee.lastName}`}</strong>
             </p>
-            <p>{`${employee.contractType} - ${employee.datesEmployed}`}</p>
+            <p>{`${employee.contractType} - ${getYearsDifference(
+              employee.datesEmployed,
+              employee.datesEmployedEnd
+            )}yrs`}</p>
             <p>{employee.email}</p>
           </div>
 

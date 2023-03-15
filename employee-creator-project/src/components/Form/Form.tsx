@@ -9,31 +9,52 @@ const Form = () => {
   } = useForm();
   return (
     <>
-      <form className={styles.Form__Container}>
+      <form className={styles.Form__container}>
         <div>
           <h2>Personal Information</h2>
           <p>First name</p>
-          <input type="text"></input>
+          <input
+            className={styles.input__text}
+            type="text"
+            placeholder="John"
+          ></input>
           <p>Middle name (if applicable)</p>
-          <input type="text"></input>
+          <input className={styles.input__text} type="text"></input>
           <p>Last name</p>
-          <input type="text"></input>
+          <input
+            className={styles.input__text}
+            type="text"
+            placeholder="Smith"
+          ></input>
         </div>
 
         <div>
           <h2>Contact Details</h2>
           <p>Email address</p>
-          <input type="email"></input>
+          <input
+            type="email"
+            className={styles.input__email}
+            placeholder="sam.riley@gmail.com"
+          ></input>
+
           <p>Mobile number</p>
-          <input type="text"></input>
+          <div className={styles.input__mobileContainer}>
+            <div>
+              <p>+61</p>
+            </div>
+            <input type="text" className={styles.input__mobile}></input>
+          </div>
           <p>Residential address</p>
-          <input type="text"></input>
+          <input
+            type="text"
+            className={styles.input__address}
+            placeholder="123 Example Street, Sydney NSW 2000"
+          ></input>
         </div>
 
         <div>
           <h2>Employee Status</h2>
-
-          <div>
+          <div className={styles.contractType__container}>
             <p>What is contract type?</p>
             <select>
               <option>Permanent</option>
@@ -46,8 +67,8 @@ const Form = () => {
           <p>Finish Date</p>
           <input type="date"></input>
 
-          <div className={styles.checkbox}>
-            <input type="checkbox"></input>
+          <div className={styles.checkbox__container}>
+            <input type="checkbox" className={styles.checkbox}></input>
             <p>Ongoing</p>
           </div>
 
@@ -61,7 +82,12 @@ const Form = () => {
           </div>
 
           <p>Hours per week</p>
-          <input type="number" min="0" max="168"></input>
+          <input
+            type="number"
+            min="0"
+            max="168"
+            className={styles.input__hours}
+          ></input>
         </div>
       </form>
     </>

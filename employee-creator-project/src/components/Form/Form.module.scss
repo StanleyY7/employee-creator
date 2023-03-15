@@ -1,6 +1,11 @@
-.Form__Container {
+@import "../../theme.scss";
+
+.Form__container {
   > div {
     padding: 2.5rem 6rem;
+    > h2 {
+      margin-bottom: 0.5rem;
+    }
     > p {
       padding: 1rem 0rem;
       font-weight: bold;
@@ -8,10 +13,78 @@
   }
 }
 
-.checkbox {
+// Misc
+
+.checkbox__container {
   display: flex;
   padding: 0.5rem 0rem;
   > input {
     margin-right: 0.25rem;
+    padding: 5rem;
   }
+}
+
+// Inputs
+
+.input__text {
+  padding: 0.7rem 9.5rem 0.7rem 0.5rem;
+  border: 0.125rem solid #747882;
+  border-radius: 0.5rem;
+  width: 10rem;
+}
+
+.input__email {
+  @extend .input__text;
+  padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+  width: 25rem;
+}
+
+.input__mobileContainer {
+  display: flex;
+  > div {
+    background-color: #dee3e5;
+    border: 0.125rem solid #747882;
+    border-right: none;
+    border-radius: 0.5rem;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    height: 2.5rem;
+    width: 3.9rem;
+    z-index: 2;
+
+    > p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-weight: bold;
+    }
+  }
+  .input__mobile {
+    @extend .input__text;
+    margin-left: -4rem;
+    padding: 0.7rem 2rem 0.7rem 5rem;
+    width: 6rem;
+    z-index: 1;
+  }
+}
+
+.input__address {
+  @extend .input__text;
+  padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+  width: 30rem;
+}
+
+.contractType__container {
+  margin: 1rem 0 0 0;
+  > p {
+    padding: 1rem 0rem;
+    font-weight: bold;
+  }
+}
+
+.input__hours {
+  @extend .input__text;
+  padding: 0.7rem 0.75rem 0.7rem 0.5rem;
+  width: 4.5rem;
 }
