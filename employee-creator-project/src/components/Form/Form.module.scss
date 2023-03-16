@@ -10,25 +10,55 @@
       padding: 1rem 0rem;
       font-weight: bold;
     }
+    > span {
+      margin-left: 0.5rem;
+      color: rgba(255, 0, 0, 0.779);
+    }
   }
 }
 
-// Misc
+// Checkboxes
 
 .checkbox__container {
   display: flex;
-  padding: 0.5rem 0rem;
-  > input {
-    margin-right: 0.25rem;
-    padding: 5rem;
+  padding: 0.5rem;
+  align-items: center;
+  height: 100%;
+  > p {
+    margin-left: 0.5rem;
   }
+}
+
+.checkbox__normal {
+  display: block !important;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox__label {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid $input_borderColor;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label {
+  background: #646974;
 }
 
 // Inputs
 
 .input__text {
   padding: 0.7rem 9.5rem 0.7rem 0.5rem;
-  border: 0.125rem solid #747882;
+  border: 0.125rem solid $input_borderColor;
   border-radius: 0.5rem;
   width: 10rem;
 }
@@ -43,7 +73,7 @@
   display: flex;
   > div {
     background-color: #dee3e5;
-    border: 0.125rem solid #747882;
+    border: 0.125rem solid $input_borderColor;
     border-right: none;
     border-radius: 0.5rem;
     border-top-right-radius: 0rem;
@@ -87,4 +117,62 @@
   @extend .input__text;
   padding: 0.7rem 0.75rem 0.7rem 0.5rem;
   width: 4.5rem;
+}
+
+.Form__buttonContainer {
+  display: flex;
+}
+.Form__cancelButton {
+  padding: 0.75rem 3.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  border: 0.125rem solid #7478828a;
+  transition: 0.5s ease;
+  font-weight: bold;
+  &:hover {
+    transform: scale(1.025);
+  }
+}
+.Form__saveButton {
+  @extend .Form__cancelButton;
+  background-color: $secondary_color;
+  border: none !important;
+  color: white;
+  margin-right: 1rem;
+  font-weight: 400 !important;
+}
+
+// Dates
+
+.date__wrapper {
+  display: flex;
+  margin-bottom: 0.75rem;
+}
+
+.date__labelContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  > p {
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+  }
+  > input {
+    @extend .input__text;
+    padding: 0.7rem 0.75rem 0.7rem 0.5rem;
+    width: 4rem;
+  }
+  > select {
+    @extend .input__text;
+    padding: 0.7rem 0.75rem 0.7rem 0.5rem;
+    width: 11.5rem;
+    margin: 0rem 1rem;
+  }
+
+  .months {
+    margin-left: 1.15rem;
+  }
+}
+
+.error__message {
+  color: rgba(255, 0, 0, 0.823);
 }
