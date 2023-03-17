@@ -15,7 +15,7 @@ const Form = () => {
   const [partTime, setPartTime] = useState(false);
   const [contract, setContract] = useState(false);
   const [permanent, setPermanent] = useState(false);
-
+  const [clicked, setClicked] = useState(false);
   const [formValues, setFormValues] = useState(initialFormValues);
 
   const onChange = (event: any) => {
@@ -222,6 +222,7 @@ const Form = () => {
               <p>Day</p>
               <input
                 type="number"
+                value={0}
                 min="1"
                 max="31"
                 {...register("startDay")}
@@ -281,70 +282,74 @@ const Form = () => {
             <p className={styles.error__message}>This field is required^</p>
           ) : null}
 
-          <p>Finish Date</p>
-          <div className={styles.date__wrapper}>
-            <div className={styles.date__labelContainer}>
-              <p>Day</p>
-              <input
-                type="number"
-                min="1"
-                max="31"
-                {...register("endDay")}
-                onChange={(event) => {
-                  setFormValues((prevState) => ({
-                    ...prevState,
-                    endDay: event.target.value,
-                  }));
-                }}
-              ></input>
-            </div>
+          {!clicked && (
+            <>
+              <p>Finish Date</p>
+              <div className={styles.date__wrapper}>
+                <div className={styles.date__labelContainer}>
+                  <p>Day</p>
+                  <input
+                    type="number"
+                    min="1"
+                    max="31"
+                    {...register("endDay")}
+                    onChange={(event) => {
+                      setFormValues((prevState) => ({
+                        ...prevState,
+                        endDay: event.target.value,
+                      }));
+                    }}
+                  ></input>
+                </div>
 
-            <div className={styles.date__labelContainer}>
-              <p className={styles.months}>Month</p>
-              <select
-                {...register("endMonth")}
-                name="endMonths"
-                onChange={(event) => {
-                  setFormValues((prevState) => ({
-                    ...prevState,
-                    endMonth: event.target.value,
-                  }));
-                }}
-              >
-                <option value="01">January</option>
-                <option value="02">February</option>
-                <option value="03">March</option>
-                <option value="04">April</option>
-                <option value="05">May</option>
-                <option value="06">June</option>
-                <option value="07">July</option>
-                <option value="08">August</option>
-                <option value="09">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-              </select>
-            </div>
+                <div className={styles.date__labelContainer}>
+                  <p className={styles.months}>Month</p>
+                  <select
+                    {...register("endMonth")}
+                    name="endMonths"
+                    onChange={(event) => {
+                      setFormValues((prevState) => ({
+                        ...prevState,
+                        endMonth: event.target.value,
+                      }));
+                    }}
+                  >
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                </div>
 
-            <div className={styles.date__labelContainer}>
-              <p>Year</p>
-              <input
-                type="number"
-                min="1970"
-                {...register("endYear")}
-                onChange={(event) => {
-                  setFormValues((prevState) => ({
-                    ...prevState,
-                    endYear: event.target.value,
-                  }));
-                }}
-                maxLength={4}
-              ></input>
-            </div>
-          </div>
-          {errors.endDay || errors.endMonth || errors.endYear ? (
-            <p className={styles.error__message}>This field is required^</p>
-          ) : null}
+                <div className={styles.date__labelContainer}>
+                  <p>Year</p>
+                  <input
+                    type="number"
+                    min="1970"
+                    {...register("endYear")}
+                    onChange={(event) => {
+                      setFormValues((prevState) => ({
+                        ...prevState,
+                        endYear: event.target.value,
+                      }));
+                    }}
+                    maxLength={4}
+                  ></input>
+                </div>
+              </div>
+              {errors.endDay || errors.endMonth || errors.endYear ? (
+                <p className={styles.error__message}>This field is required^</p>
+              ) : null}
+            </>
+          )}
 
           <div className={styles.checkbox__container}>
             <input
@@ -352,7 +357,9 @@ const Form = () => {
               className={styles.checkbox__normal}
               {...register("onGoing")}
               onChange={(event) => {
+                setClicked(!clicked);
                 onChange(event);
+                formValues.onGoing = true;
                 setFormValues({ ...formValues, onGoing: true });
               }}
             ></input>

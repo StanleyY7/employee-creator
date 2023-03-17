@@ -27,9 +27,30 @@ export const customSchema = yup.object().shape({
   startDay: yup.number().required(),
   startMonth: yup.string().required(),
   startYear: yup.number().required(),
+  onGoing: yup.boolean(),
   endDay: yup.number().required(),
   endMonth: yup.string().required(),
-  endYear: yup.number().required(),
+  endYear: yup
+    .number()
+    .required()
+    .test(
+      "is-greater",
+      "End date must be greater than start date",
+      function (value) {
+        const { path, createError, parent } = this;
+        const startDate = combineStartDate(parent);
+        const endDate = combineEndDate(parent);
+
+        if (endDate > startDate) {
+          return true;
+        }
+
+        return createError({
+          path,
+          message: "End date must be greater than start date",
+        });
+      }
+    ),
   employmentType: yup
     .string()
     .oneOf(["Full-time", "Part-time"], "Please select an employment type")
@@ -40,17 +61,25 @@ export const customSchema = yup.object().shape({
 // Converting Value of Dates from Form
 
 export const combineStartDate = (data: FormValues) => {
-  const day = data.startDay ?? "01";
-  const month = data.startMonth ?? "01";
-  const year = data.startYear ?? "1970";
+  const day = data.startDay ?? null;
+  const month = data.startMonth ?? null;
+  const year = data.startYear ?? null;
   const date = new Date(`${year}-${month}-${day}`);
   return date;
 };
 
 export const combineEndDate = (data: FormValues) => {
-  const day = data.endDay ?? "01";
-  const month = data.endMonth ?? "01";
-  const year = data.endYear ?? "1970";
+  if (data.onGoing) return null;
+
+  const currentDate = new Date();
+  const currentDay = String(currentDate.getDate()).padStart(2, "0");
+  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const currentYear = currentDate.getFullYear();
+
+  const day = data.endDay ?? currentDay;
+  const month = data.endMonth ?? currentMonth;
+  const year = data.endYear ?? currentYear;
+
   const date = new Date(`${year}-${month}-${day}`);
   return date;
 };
