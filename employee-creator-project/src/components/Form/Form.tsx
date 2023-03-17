@@ -1,28 +1,20 @@
 import styles from "./Form.module.scss";
 import { FormValues } from "../../types/form";
-import { initialFormValues } from "../../services/general";
 
 import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { customSchema } from "../../services/general";
 
-import { combineStartDate, combineEndDate } from "../../services/general";
+import {
+  customSchema,
+  initialFormValues,
+  combineStartDate,
+  combineEndDate,
+} from "../../services/form";
+import { postEmployee } from "../../services/employee";
 
 const Form = () => {
-  const [fullTime, setFulltime] = useState(false);
-  const [partTime, setPartTime] = useState(false);
-  const [contract, setContract] = useState(false);
-  const [permanent, setPermanent] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  const [formValues, setFormValues] = useState(initialFormValues);
-
-  const onChange = (event: any) => {
-    const { value, id } = event.target;
-    setFormValues({ ...formValues, [id]: value });
-  };
-
   const {
     register,
     handleSubmit,
@@ -32,8 +24,21 @@ const Form = () => {
     resolver: yupResolver(customSchema),
   });
 
-  const onSubmitData: SubmitHandler<FormValues> = async (employee: any) => {
-    console.log(employee);
+  // State
+  const [fullTime, setFulltime] = useState(false);
+  const [partTime, setPartTime] = useState(false);
+  const [contract, setContract] = useState(false);
+  const [permanent, setPermanent] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  const onChange = (event: any) => {
+    const { value, id } = event.target;
+    setFormValues({ ...formValues, [id]: value });
+  };
+
+  const onSubmitData = async () => {
     const newEmployee: FormValues = {
       firstName: formValues.firstName,
       middleName: formValues.middleName,
@@ -48,20 +53,7 @@ const Form = () => {
       onGoing: formValues.onGoing,
       hoursPW: formValues.hoursPW,
     } as any;
-    try {
-      const postData = await fetch("http://localhost:8080/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newEmployee),
-      });
-      const response = await postData.json();
-      console.log(response);
-      alert("success!");
-    } catch (e) {
-      throw new Error("An error occured, the error is: " + e);
-    }
+    postEmployee(newEmployee);
   };
 
   return (
@@ -222,7 +214,6 @@ const Form = () => {
               <p>Day</p>
               <input
                 type="number"
-                value={0}
                 min="1"
                 max="31"
                 {...register("startDay")}
@@ -267,6 +258,7 @@ const Form = () => {
               <input
                 type="number"
                 min="1970"
+                max="3000"
                 {...register("startYear")}
                 maxLength={4}
                 onChange={(event) => {
@@ -294,8 +286,8 @@ const Form = () => {
                     max="31"
                     {...register("endDay")}
                     onChange={(event) => {
-                      setFormValues((prevState) => ({
-                        ...prevState,
+                      setFormValues(() => ({
+                        ...formValues,
                         endDay: event.target.value,
                       }));
                     }}
@@ -308,8 +300,8 @@ const Form = () => {
                     {...register("endMonth")}
                     name="endMonths"
                     onChange={(event) => {
-                      setFormValues((prevState) => ({
-                        ...prevState,
+                      setFormValues(() => ({
+                        ...formValues,
                         endMonth: event.target.value,
                       }));
                     }}
@@ -334,14 +326,14 @@ const Form = () => {
                   <input
                     type="number"
                     min="1970"
+                    max="3000"
                     {...register("endYear")}
                     onChange={(event) => {
-                      setFormValues((prevState) => ({
-                        ...prevState,
+                      setFormValues(() => ({
+                        ...formValues,
                         endYear: event.target.value,
                       }));
                     }}
-                    maxLength={4}
                   ></input>
                 </div>
               </div>

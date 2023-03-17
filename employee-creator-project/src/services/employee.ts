@@ -1,3 +1,5 @@
+import { FormValues } from "../types/form";
+
 // GET
 
 export const getAll = async () => {
@@ -8,6 +10,28 @@ export const getAll = async () => {
 };
 
 // POST
+export const postEmployee = async (newEmployee: FormValues) => {
+  try {
+    const postData = await fetch("http://localhost:8080/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newEmployee),
+    });
+    if (postData.ok) {
+      const response = await postData.json();
+      console.log(response);
+      alert("success!");
+    } else {
+      const errorMessage = await postData.text();
+      throw new Error(errorMessage);
+    }
+  } catch (e) {
+    alert("error, unable to submit!");
+    console.log(e);
+  }
+};
 
 // DELETE
 export const deleteById = async (id: any) => {
