@@ -1,5 +1,9 @@
 @import "../../theme.scss";
 
+.listHeading {
+  padding: 7rem 6rem !important;
+}
+
 .EmployeeList__GridContainer {
   display: flex;
   justify-content: center;
@@ -38,39 +42,27 @@
   margin: auto;
   padding-top: 4rem;
 }
-.EmployeeCard__Container {
-  width: 50vw;
 
-  .EmployeeCard__Grid {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    border-top: 0.175rem solid $border_color;
-    padding: 1.25rem;
-    .EmployeeCard__Text {
-      > p {
-        padding: 0.5rem 0;
-      }
-    }
-    .EmployeeCard__Options {
-      display: flex;
-      > a {
-        padding: 0rem 0.25rem;
-        text-decoration: underline;
-        color: $link_color;
-      }
-      > p {
-        padding: 0rem 0.25rem;
-        text-decoration: underline;
-        color: $link_color;
-        &:hover {
-          cursor: pointer;
+.divider {
+  color: #d3d2d7 !important;
+}
+
+@media screen and (max-width: 720px) {
+  .listHeading {
+    padding: 4rem 3rem !important;
+  }
+  .EmployeeList__GridContainer {
+    .EmployeeList__Grid {
+      width: 100% !important;
+      .EmployeeList__Top {
+        > p {
+          font-size: 0.75rem;
+          padding: 1rem;
+        }
+        .EmployeeList__Button {
+          padding: 0.5rem 1rem;
         }
       }
     }
   }
-}
-
-.divider {
-  color: #d3d2d7 !important;
 }
