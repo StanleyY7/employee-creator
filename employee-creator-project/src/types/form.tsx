@@ -12,9 +12,9 @@ export type FormTypes = {
   endDay: string;
   endMonth: string;
   endYear: string;
-  onGoing: boolean;
+  onGoing: true | false;
   employmentType: string;
   hoursPW: Number;
-  datesEmployed: any;
-  datesEmployedEnd: any;
+  datesEmployed: Number | string;
+  datesEmployedEnd: Number | string;
 };

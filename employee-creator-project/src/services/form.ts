@@ -17,9 +17,9 @@ export const combineStartDate = (data: any) => {
 };
 
 export const combineEndDate = (data: any) => {
-  const day = data.endDay ?? currentDay;
-  const month = data.endMonth ?? currentMonth;
-  const year = data.endYear ?? currentYear;
+  const day = data.endDay ?? "current";
+  const month = data.endMonth ?? "current";
+  const year = data.endYear ?? "current";
 
   const date = new Date(`${year}-${month}-${day}`);
   return date;
@@ -30,6 +30,7 @@ export const combineEndDate = (data: any) => {
 export const onSubmitData: SubmitHandler<FormTypes> = async (
   data: FormTypes
 ) => {
+  console.log(data);
   const newEmployee: FormTypes = {
     firstName: data.firstName,
     middleName: data.middleName,
@@ -39,10 +40,10 @@ export const onSubmitData: SubmitHandler<FormTypes> = async (
     address: data.address,
     contractType: data.contractType,
     datesEmployed: combineStartDate(data),
-    datesEmployedEnd: combineEndDate(data),
+    datesEmployedEnd: "" ? "current employee" : combineEndDate(data),
     employmentType: data.employmentType,
     onGoing: data.onGoing,
     hoursPW: data.hoursPW,
-  } as FormTypes;
+  } as any;
   postEmployee(newEmployee);
 };

@@ -5,9 +5,14 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 
 import { FormTypes } from "../../types/form";
-import { onSubmitData } from "../../services/form";
+import {
+  currentDay,
+  currentMonth,
+  currentYear,
+  onSubmitData,
+} from "../../services/form";
 
-const UseFormApp = () => {
+const Form = () => {
   // State
   const [fullTime, setFulltime] = useState(false);
   const [partTime, setPartTime] = useState(false);
@@ -281,7 +286,9 @@ const UseFormApp = () => {
             {...register("onGoing")}
             onChange={() => {
               setClicked(!clicked);
-              setValue("onGoing", clicked);
+              setValue("endDay", currentDay);
+              setValue("endMonth", currentMonth);
+              setValue("endYear", currentYear);
             }}
           ></input>
           <p>On-Going</p>
@@ -359,4 +366,4 @@ const UseFormApp = () => {
     </form>
   );
 };
-export default UseFormApp;
+export default Form;
