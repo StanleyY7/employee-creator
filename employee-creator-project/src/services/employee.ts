@@ -1,4 +1,4 @@
-import { FormValues } from "../types/form";
+import { FormTypes } from "../types/form";
 
 // GET
 
@@ -10,7 +10,7 @@ export const getAll = async () => {
 };
 
 // POST
-export const postEmployee = async (newEmployee: FormValues) => {
+export const postEmployee = async (newEmployee: FormTypes) => {
   try {
     const postData = await fetch("http://localhost:8080/posts", {
       method: "POST",

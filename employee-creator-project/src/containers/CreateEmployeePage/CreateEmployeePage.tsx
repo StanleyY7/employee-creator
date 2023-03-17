@@ -1,7 +1,8 @@
 import generalStyles from "../../App.module.scss";
 import styles from "./CreateEmployeePage.module.scss";
-import Form from "../../components/Form/Form";
+
 import BackButton from "../../components/BackButton/BackButton";
+import UseFormApp from "../../components/Form/useForm";
 const CreateEmployeePage = () => {
   return (
     <>
@@ -12,7 +13,7 @@ const CreateEmployeePage = () => {
             <h1>Employee Creation</h1>
           </div>
           <div className={styles.CreateEmployeePage__Grid}>
-            <Form />
+            <UseFormApp />
           </div>
         </section>
       </div>
