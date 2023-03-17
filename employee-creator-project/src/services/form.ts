@@ -1,35 +1,6 @@
-import * as yup from "yup";
-import { FormValues } from "../types/form";
-
-// Form Validation for Form
-
-export const customSchema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-  email: yup.string().email().required(),
-  phoneNumber: yup
-    .string()
-    .matches(/^\d+$/, { message: "Please enter only numbers" })
-    .required(),
-  address: yup.string().required(),
-  contractType: yup
-    .string()
-    .oneOf(["Contract, Permanent"], "Please select a contract type")
-    .required(),
-  startDay: yup.number().required(),
-  startMonth: yup.string().required(),
-  startYear: yup.number().required(),
-  onGoing: yup.boolean(),
-  endDay: yup.number().required(),
-  endMonth: yup.string().required(),
-  endYear: yup.number().required(),
-  employmentType: yup
-    .string()
-    .oneOf(["Full-time", "Part-time"], "Please select an employment type")
-    .required(),
-  hoursPW: yup.number().required(),
-});
-
+import { FormTypes } from "../types/form";
+import { SubmitHandler } from "react-hook-form";
+import { postEmployee } from "./employee";
 // Converting Value of Dates from Form
 
 const currentDate = new Date();
@@ -46,31 +17,33 @@ export const combineStartDate = (data: any) => {
 };
 
 export const combineEndDate = (data: any) => {
-  const day = data.endDay ?? currentDay;
-  const month = data.endMonth ?? currentMonth;
-  const year = data.endYear ?? currentYear;
+  const day = data.endDay ?? "current";
+  const month = data.endMonth ?? "current";
+  const year = data.endYear ?? "current";
 
   const date = new Date(`${year}-${month}-${day}`);
   return date;
 };
 
-// Initial Form Values
+// Submit Handler
 
-export const initialFormValues = {
-  firstName: "",
-  middleName: "",
-  lastName: "",
-  emailTest: "",
-  phoneNumber: "",
-  address: "",
-  contractType: "",
-  employmentType: "",
-  onGoing: false,
-  hoursPW: 0,
-  startDay: "",
-  startMonth: "01",
-  startYear: "",
-  endDay: "",
-  endMonth: "01",
-  endYear: "",
+export const onSubmitData: SubmitHandler<FormTypes> = async (
+  data: FormTypes
+) => {
+  console.log(data);
+  const newEmployee: FormTypes = {
+    firstName: data.firstName,
+    middleName: data.middleName,
+    lastName: data.lastName,
+    email: data.email,
+    phoneNumber: data.phoneNumber,
+    address: data.address,
+    contractType: data.contractType,
+    datesEmployed: combineStartDate(data),
+    datesEmployedEnd: "" ? "current employee" : combineEndDate(data),
+    employmentType: data.employmentType,
+    onGoing: data.onGoing,
+    hoursPW: data.hoursPW,
+  } as any;
+  postEmployee(newEmployee);
 };

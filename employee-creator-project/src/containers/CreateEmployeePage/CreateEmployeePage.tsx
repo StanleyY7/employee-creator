@@ -1,7 +1,8 @@
 import generalStyles from "../../App.module.scss";
 import styles from "./CreateEmployeePage.module.scss";
-import Form from "../../components/Form/Form";
+
 import BackButton from "../../components/BackButton/BackButton";
+import Form from "../../components/Form/Form";
 const CreateEmployeePage = () => {
   return (
     <>
