@@ -11,6 +11,8 @@ import {
   initialFormValues,
   combineStartDate,
   combineEndDate,
+  currentMonth,
+  currentYear,
 } from "../../services/form";
 import { postEmployee } from "../../services/employee";
 
@@ -300,10 +302,15 @@ const Form = () => {
                     {...register("endMonth")}
                     name="endMonths"
                     onChange={(event) => {
-                      setFormValues(() => ({
-                        ...formValues,
-                        endMonth: event.target.value,
-                      }));
+                      clicked
+                        ? setFormValues(() => ({
+                            ...formValues,
+                            endMonth: (event.target.value = currentMonth),
+                          }))
+                        : setFormValues(() => ({
+                            ...formValues,
+                            endMonth: event.target.value,
+                          }));
                     }}
                   >
                     <option value="01">January</option>
@@ -329,10 +336,15 @@ const Form = () => {
                     max="3000"
                     {...register("endYear")}
                     onChange={(event) => {
-                      setFormValues(() => ({
-                        ...formValues,
-                        endYear: event.target.value,
-                      }));
+                      clicked
+                        ? setFormValues(() => ({
+                            ...formValues,
+                            endYear: (event.target.value = currentYear),
+                          }))
+                        : setFormValues(() => ({
+                            ...formValues,
+                            endYear: event.target.value,
+                          }));
                     }}
                   ></input>
                 </div>

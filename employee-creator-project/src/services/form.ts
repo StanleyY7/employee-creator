@@ -22,27 +22,7 @@ export const customSchema = yup.object().shape({
   onGoing: yup.boolean(),
   endDay: yup.number().required(),
   endMonth: yup.string().required(),
-  endYear: yup
-    .number()
-    .required()
-    .test(
-      "is-greater",
-      "End date must be greater than start date",
-      function (value) {
-        const { path, createError, parent } = this;
-        const startDate = combineStartDate(parent);
-        const endDate = combineEndDate(parent);
-
-        if (endDate > startDate) {
-          return true;
-        }
-
-        return createError({
-          path,
-          message: "End date must be greater than start date",
-        });
-      }
-    ),
+  endYear: yup.number().required(),
   employmentType: yup
     .string()
     .oneOf(["Full-time", "Part-time"], "Please select an employment type")
@@ -55,9 +35,9 @@ export const customSchema = yup.object().shape({
 const currentDate = new Date();
 export const currentDay = String(currentDate.getDate()).padStart(2, "0");
 export const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
-export const currentYear = String(currentDate.getFullYear());
+export const currentYear = "2023";
 
-export const combineStartDate = (data: FormValues) => {
+export const combineStartDate = (data: any) => {
   const day = data.startDay ?? currentDay;
   const month = data.startMonth ?? currentMonth;
   const year = data.startYear ?? currentYear;
@@ -65,10 +45,10 @@ export const combineStartDate = (data: FormValues) => {
   return date;
 };
 
-export const combineEndDate = (data: FormValues) => {
-  const day = data.endDay;
-  const month = data.endMonth;
-  const year = data.endYear;
+export const combineEndDate = (data: any) => {
+  const day = data.endDay ?? currentDay;
+  const month = data.endMonth ?? currentMonth;
+  const year = data.endYear ?? currentYear;
 
   const date = new Date(`${year}-${month}-${day}`);
   return date;
