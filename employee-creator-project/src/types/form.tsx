@@ -1,0 +1,20 @@
+export type FormValues = {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  startDay: string;
+  startMonth: string;
+  startYear: string;
+  endDay: string;
+  endMonth: string;
+  endYear: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  contractType: string;
+  employmentType: string;
+  onGoing: Boolean;
+  hoursPW: Number;
+  datesEmployed: any;
+  datesEmployedEnd: any;
+};

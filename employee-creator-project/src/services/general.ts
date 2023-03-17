@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { FormValues } from "../types/form";
 // Find Difference of Years for EmployeeCard
 export const getYearsDifference = (start: string, end: string) => {
   const startDate = new Date(start);
@@ -38,18 +39,39 @@ export const customSchema = yup.object().shape({
 
 // Converting Value of Dates from Form
 
-export const combineStartDate = (data: any, setValue: any) => {
+export const combineStartDate = (data: FormValues) => {
   const day = data.startDay ?? "01";
   const month = data.startMonth ?? "01";
   const year = data.startYear ?? "1970";
   const date = new Date(`${year}-${month}-${day}`);
-  setValue("datesEmployed", date);
+  return date;
 };
 
-export const combineEndDate = (data: any, setValue: any) => {
+export const combineEndDate = (data: FormValues) => {
   const day = data.endDay ?? "01";
   const month = data.endMonth ?? "01";
   const year = data.endYear ?? "1970";
   const date = new Date(`${year}-${month}-${day}`);
-  setValue("datesEmployedEnd", date);
+  return date;
+};
+
+// Initial Form Values
+
+export const initialFormValues = {
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  emailTest: "",
+  phoneNumber: "",
+  address: "",
+  contractType: "",
+  employmentType: "",
+  onGoing: false,
+  hoursPW: 0,
+  startDay: "01",
+  startMonth: "01",
+  startYear: "1970",
+  endDay: "",
+  endMonth: "",
+  endYear: "",
 };

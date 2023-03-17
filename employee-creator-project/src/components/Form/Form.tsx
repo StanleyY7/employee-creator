@@ -1,7 +1,9 @@
 import styles from "./Form.module.scss";
+import { FormValues } from "../../types/form";
+import { initialFormValues } from "../../services/general";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { customSchema } from "../../services/general";
@@ -14,18 +16,60 @@ const Form = () => {
   const [contract, setContract] = useState(false);
   const [permanent, setPermanent] = useState(false);
 
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  const onChange = (event: any) => {
+    const { value, id } = event.target;
+    setFormValues({ ...formValues, [id]: value });
+  };
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(customSchema),
   });
 
+  const onSubmitData: SubmitHandler<FormValues> = async (employee: any) => {
+    console.log(employee);
+    const newEmployee: FormValues = {
+      firstName: formValues.firstName,
+      middleName: formValues.middleName,
+      lastName: formValues.lastName,
+      email: formValues.emailTest,
+      phoneNumber: formValues.phoneNumber,
+      address: formValues.address,
+      contractType: formValues.contractType,
+      datesEmployed: combineStartDate(formValues),
+      datesEmployedEnd: combineEndDate(formValues),
+      employmentType: formValues.employmentType,
+      onGoing: formValues.onGoing,
+      hoursPW: formValues.hoursPW,
+    } as any;
+    try {
+      const postData = await fetch("http://localhost:8080/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newEmployee),
+      });
+      const response = await postData.json();
+      console.log(response);
+      alert("success!");
+    } catch (e) {
+      throw new Error("An error occured, the error is: " + e);
+    }
+  };
+
   return (
     <>
-      <form className={styles.Form__container}>
+      <form
+        className={styles.Form__container}
+        onSubmit={handleSubmit(onSubmitData)}
+      >
         <div>
           <h2>Personal Information</h2>
 
@@ -34,7 +78,10 @@ const Form = () => {
             className={styles.input__text}
             type="text"
             placeholder="John"
+            id="firstName"
             {...register("firstName")}
+            value={formValues.firstName}
+            onChange={onChange}
           ></input>
           {errors.firstName && (
             <p className={styles.error__message}>This field is required^</p>
@@ -44,14 +91,20 @@ const Form = () => {
           <input
             className={styles.input__text}
             type="text"
+            id="middleName"
             {...register("middleName")}
+            value={formValues.middleName}
+            onChange={onChange}
           ></input>
           <p>Last name</p>
           <input
             className={styles.input__text}
             type="text"
+            id="lastName"
             placeholder="Smith"
             {...register("lastName")}
+            value={formValues.lastName}
+            onChange={onChange}
           ></input>
           {errors.lastName && (
             <p className={styles.error__message}>This field is required^</p>
@@ -65,9 +118,12 @@ const Form = () => {
           <input
             type="email"
             className={styles.input__email}
+            id="emailTest"
             placeholder="sam.riley@gmail.com"
             maxLength={254}
             {...register("email")}
+            value={formValues.emailTest}
+            onChange={onChange}
           ></input>
           {errors.email && (
             <p className={styles.error__message}>This field is required^</p>
@@ -82,8 +138,11 @@ const Form = () => {
               type="text"
               className={styles.input__mobile}
               maxLength={10}
+              id="phoneNumber"
               placeholder="04123456789"
+              value={formValues.phoneNumber}
               {...register("phoneNumber")}
+              onChange={onChange}
             ></input>
           </div>
           {errors.phoneNumber && (
@@ -98,7 +157,10 @@ const Form = () => {
             className={styles.input__address}
             placeholder="123 Example Street, Sydney NSW 2000"
             maxLength={200}
+            id="address"
             {...register("address")}
+            value={formValues.address}
+            onChange={onChange}
           ></input>
           {errors.address && (
             <p className={styles.error__message}>This field is required^</p>
@@ -113,17 +175,18 @@ const Form = () => {
             <div className={styles.checkbox__container}>
               <input
                 type="checkbox"
-                id="Permanent"
+                id="contractType"
                 value="Permanent"
                 {...register("contractType")}
                 onChange={(e) => {
                   setPermanent(true);
                   setValue("contractType", e.target.checked ? "Permanent" : "");
+                  setFormValues({ ...formValues, contractType: "Permanent" });
                 }}
               ></input>
               <label
                 className={styles.checkbox__label}
-                htmlFor="Permanent"
+                htmlFor="contractType"
               ></label>
               <p>Permanent</p>
             </div>
@@ -132,17 +195,18 @@ const Form = () => {
           <div className={styles.checkbox__container}>
             <input
               type="checkbox"
-              id="Contract"
+              id="contractType2"
               value="Contract"
               {...register("contractType")}
               onChange={(e) => {
                 setContract(true);
                 setValue("contractType", e.target.checked ? "Contract" : "");
+                setFormValues({ ...formValues, contractType: "Contract" });
               }}
             ></input>
             <label
               className={styles.checkbox__label}
-              htmlFor="Contract"
+              htmlFor="contractType2"
             ></label>
             <p>Contract</p>
           </div>
@@ -161,12 +225,27 @@ const Form = () => {
                 min="1"
                 max="31"
                 {...register("startDay")}
+                onChange={(event) => {
+                  setFormValues((prevState) => ({
+                    ...prevState,
+                    startDay: event.target.value,
+                  }));
+                }}
               ></input>
             </div>
 
             <div className={styles.date__labelContainer}>
               <p className={styles.months}>Month</p>
-              <select {...register("startMonth")} name="startMonths">
+              <select
+                {...register("startMonth")}
+                name="startMonths"
+                onChange={(event) => {
+                  setFormValues((prevState) => ({
+                    ...prevState,
+                    startMonth: event.target.value,
+                  }));
+                }}
+              >
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -188,6 +267,13 @@ const Form = () => {
                 type="number"
                 min="1970"
                 {...register("startYear")}
+                maxLength={4}
+                onChange={(event) => {
+                  setFormValues((prevState) => ({
+                    ...prevState,
+                    startYear: event.target.value,
+                  }));
+                }}
               ></input>
             </div>
           </div>
@@ -204,12 +290,27 @@ const Form = () => {
                 min="1"
                 max="31"
                 {...register("endDay")}
+                onChange={(event) => {
+                  setFormValues((prevState) => ({
+                    ...prevState,
+                    endDay: event.target.value,
+                  }));
+                }}
               ></input>
             </div>
 
             <div className={styles.date__labelContainer}>
               <p className={styles.months}>Month</p>
-              <select {...register("endMonth")} name="endMonths">
+              <select
+                {...register("endMonth")}
+                name="endMonths"
+                onChange={(event) => {
+                  setFormValues((prevState) => ({
+                    ...prevState,
+                    endMonth: event.target.value,
+                  }));
+                }}
+              >
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -227,7 +328,18 @@ const Form = () => {
 
             <div className={styles.date__labelContainer}>
               <p>Year</p>
-              <input type="number" min="1970" {...register("endYear")}></input>
+              <input
+                type="number"
+                min="1970"
+                {...register("endYear")}
+                onChange={(event) => {
+                  setFormValues((prevState) => ({
+                    ...prevState,
+                    endYear: event.target.value,
+                  }));
+                }}
+                maxLength={4}
+              ></input>
             </div>
           </div>
           {errors.endDay || errors.endMonth || errors.endYear ? (
@@ -239,6 +351,10 @@ const Form = () => {
               type="checkbox"
               className={styles.checkbox__normal}
               {...register("onGoing")}
+              onChange={(event) => {
+                onChange(event);
+                setFormValues({ ...formValues, onGoing: true });
+              }}
             ></input>
             <p>On-Going</p>
           </div>
@@ -249,7 +365,7 @@ const Form = () => {
             <div className={styles.checkbox__container}>
               <input
                 type="checkbox"
-                id="Full-time"
+                id="employmentType"
                 value="Full-time"
                 {...register("employmentType")}
                 onChange={(e) => {
@@ -258,11 +374,12 @@ const Form = () => {
                     "employmentType",
                     e.target.checked ? "Full-time" : ""
                   );
+                  setFormValues({ ...formValues, employmentType: "Full-time" });
                 }}
               ></input>
               <label
                 className={styles.checkbox__label}
-                htmlFor="Full-time"
+                htmlFor="employmentType"
               ></label>
               <p>Full-time</p>
             </div>
@@ -270,7 +387,7 @@ const Form = () => {
             <div className={styles.checkbox__container}>
               <input
                 type="checkbox"
-                id="Part-time"
+                id="employmentType2"
                 value="Part-time"
                 {...register("employmentType")}
                 onChange={(e) => {
@@ -279,11 +396,12 @@ const Form = () => {
                     "employmentType",
                     e.target.checked ? "Part-time" : ""
                   );
+                  setFormValues({ ...formValues, employmentType: "Part-time" });
                 }}
               ></input>
               <label
                 className={styles.checkbox__label}
-                htmlFor="Part-time"
+                htmlFor="employmentType2"
               ></label>
               <p>Part-time</p>
             </div>
@@ -299,8 +417,11 @@ const Form = () => {
             type="number"
             min="0"
             max="168"
+            id="hoursPW"
             className={styles.input__hours}
+            value={formValues.hoursPW}
             {...register("hoursPW")}
+            onChange={onChange}
           ></input>
           {errors.hoursPW && (
             <p className={styles.error__message}>This field is required^</p>
@@ -309,8 +430,9 @@ const Form = () => {
 
         <div className={styles.Form__buttonContainer}>
           <button
+            type="submit"
+            onClick={onSubmitData}
             className={styles.Form__saveButton}
-            onClick={handleSubmit(null, null)}
           >
             Save
           </button>
