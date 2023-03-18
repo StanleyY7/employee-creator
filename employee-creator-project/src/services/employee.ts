@@ -23,6 +23,7 @@ export const postEmployee = async (newEmployee: FormTypes) => {
       const response = await postData.json();
       console.log(response);
       alert("success!");
+      window.location.reload();
     } else {
       const errorMessage = await postData.text();
       throw new Error(errorMessage);
