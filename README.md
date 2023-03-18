@@ -1,6 +1,5 @@
 # Employee Creator Project (Full Stack)
-
-
+![employeeCreator](https://user-images.githubusercontent.com/119549394/226088729-ffbcc9da-c0d4-4c2e-93ef-b76334b3ffce.png)
 
 ## Overview
 
