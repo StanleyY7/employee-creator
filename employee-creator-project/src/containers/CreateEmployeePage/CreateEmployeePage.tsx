@@ -8,7 +8,9 @@ const CreateEmployeePage = () => {
     <>
       <div>
         <section>
-          <div className={generalStyles.Header__Container}>
+          <div
+            className={`${generalStyles.Header__Container} ${styles.CreateEmployeePage__wrapper}`}
+          >
             <BackButton />
             <h1>Employee Creation</h1>
           </div>

@@ -2,3 +2,44 @@
   display: grid;
   grid-template-columns: 1fr;
 }
+
+@media screen and (min-width: 160px) and (max-width: 200px) {
+  .CreateEmployeePage__wrapper {
+    width: 400vw !important;
+    height: 150vw;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 275px) {
+  .CreateEmployeePage__wrapper {
+    width: 400vw !important;
+    height: 120vw;
+  }
+}
+
+@media screen and (min-width: 275px) and (max-width: 280px) {
+  .CreateEmployeePage__wrapper {
+    width: 250vw !important;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 400px) {
+  .CreateEmployeePage__wrapper {
+    width: 250vw !important;
+    height: 75vw;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 525px) {
+  .CreateEmployeePage__wrapper {
+    width: 250vw !important;
+    height: 57.5vw;
+  }
+}
+
+@media screen and (min-width: 525px) and (max-width: 700px) {
+  .CreateEmployeePage__wrapper {
+    width: 250vw !important;
+    height: 42.5vw;
+  }
+}
