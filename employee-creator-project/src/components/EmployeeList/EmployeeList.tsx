@@ -1,11 +1,9 @@
-import { getAll } from "../../services/employee";
-import { useQuery } from "react-query";
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { FormContext } from "../Context/Context";
 import EmployeeCard from "../EmployeeCard/EmployeeCard";
 
 const EmployeeList = () => {
-  const { data } = useQuery("getEmployees", getAll);
-  const [employees, setEmployees] = useState([]);
+  const { data, setEmployees, employees } = useContext(FormContext);
 
   useEffect(() => {
     setEmployees(data);

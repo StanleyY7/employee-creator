@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, SetStateAction } from "react";
+import { useQuery } from "react-query";
+import { getAll } from "../../services/employee";
 
 const contextValue = {
   fullTime: {},
@@ -11,6 +13,13 @@ const contextValue = {
   setPermanent: (contractType: SetStateAction<boolean>) => {},
   clicked: {},
   setClicked: (clicked: SetStateAction<boolean>) => {},
+  employees: [],
+  setEmployees: (employee: any) => {},
+  edit: {},
+  setEdit: (edit: SetStateAction<boolean>) => {},
+  data: [],
+  selectEmployee: {} as any,
+  setSelectEmployee: (employee: any) => {},
 };
 
 export const FormContext = createContext(contextValue);
@@ -23,7 +32,10 @@ export const ContextProvider = ({ children }: any) => {
   const [contract, setContract] = useState(false);
   const [permanent, setPermanent] = useState(false);
   const [clicked, setClicked] = useState(false);
-
+  const [employees, setEmployees] = useState([]);
+  const [edit, setEdit] = useState(false);
+  const { data } = useQuery("getEmployees", getAll);
+  const [selectEmployee, setSelectEmployee] = useState([]);
   return (
     <FormContext.Provider
       value={{
@@ -37,6 +49,13 @@ export const ContextProvider = ({ children }: any) => {
         setPermanent,
         clicked,
         setClicked,
+        employees,
+        setEmployees,
+        edit,
+        setEdit,
+        data,
+        selectEmployee,
+        setSelectEmployee,
       }}
     >
       {children}

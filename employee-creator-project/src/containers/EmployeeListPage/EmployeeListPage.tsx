@@ -3,8 +3,11 @@ import generalStyles from "../../App.module.scss";
 import EmployeeList from "../../components/EmployeeList/EmployeeList";
 
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { FormContext } from "../../components/Context/Context";
 
 const EmployeeListPage = () => {
+  const { setEdit } = useContext(FormContext);
   return (
     <>
       <div>
@@ -20,7 +23,10 @@ const EmployeeListPage = () => {
                   Please click on 'Edit' to find more details of each employee.
                 </p>
                 <NavLink to="/add-employee">
-                  <button className={styles.EmployeeList__Button}>
+                  <button
+                    className={styles.EmployeeList__Button}
+                    onClick={() => setEdit(false)}
+                  >
                     Add Employee
                   </button>
                 </NavLink>

@@ -1,6 +1,9 @@
+import { FormContext } from "../Context/Context";
+import { useContext } from "react";
 import styles from "../Form/Form.module.scss";
 
 const PISection = ({ register, errors }: any) => {
+  const { edit, selectEmployee } = useContext(FormContext);
   return (
     <div>
       <h2>Personal Information</h2>
@@ -9,7 +12,7 @@ const PISection = ({ register, errors }: any) => {
       <input
         className={styles.input__text}
         placeholder="John"
-        defaultValue=""
+        defaultValue={edit ? selectEmployee.firstName : ""}
         {...register("firstName", { required: true })}
       ></input>
       {errors.firstName && (
@@ -21,6 +24,7 @@ const PISection = ({ register, errors }: any) => {
         className={styles.input__text}
         type="text"
         id="middleName"
+        defaultValue={edit ? selectEmployee.middleName : ""}
         {...register("middleName")}
       ></input>
 
@@ -28,6 +32,7 @@ const PISection = ({ register, errors }: any) => {
       <input
         className={styles.input__text}
         placeholder="Smith"
+        defaultValue={edit ? selectEmployee.lastName : ""}
         {...register("lastName", { required: true })}
       ></input>
       {errors.lastName && (

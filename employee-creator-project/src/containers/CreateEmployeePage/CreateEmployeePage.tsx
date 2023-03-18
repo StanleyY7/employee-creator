@@ -1,9 +1,15 @@
 import generalStyles from "../../App.module.scss";
 import styles from "./CreateEmployeePage.module.scss";
-
+import { useEffect, useContext } from "react";
 import BackButton from "../../components/BackButton/BackButton";
 import Form from "../../components/Form/Form";
+import { FormContext } from "../../components/Context/Context";
 const CreateEmployeePage = () => {
+  const { setEdit } = useContext(FormContext);
+  useEffect(() => {
+    setEdit(false);
+  }, []);
+
   return (
     <>
       <div>

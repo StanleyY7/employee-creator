@@ -2,12 +2,15 @@ import styles from "./EmployeeCard.module.scss";
 import { deleteById } from "../../services/employee";
 import { getYearsDifference } from "../../services/general";
 import { NavLink } from "react-router-dom";
+import { FormContext } from "../Context/Context";
+import { useContext } from "react";
 
 const EmployeeCard = ({ employee, filterRemove }: any) => {
   const handleRemove = () => {
     deleteById(employee.id);
     filterRemove(employee.id);
   };
+  const { setSelectEmployee, setEdit } = useContext(FormContext);
 
   return (
     <>
@@ -25,7 +28,14 @@ const EmployeeCard = ({ employee, filterRemove }: any) => {
           </div>
 
           <div className={styles.EmployeeCard__Options}>
-            <NavLink className={styles.editLink} to="/edit-employee">
+            <NavLink
+              onClick={() => {
+                setSelectEmployee(employee);
+                setEdit(true);
+              }}
+              className={styles.editLink}
+              to="/edit-employee"
+            >
               Edit
             </NavLink>
             <p className={styles.divider}>|</p>
