@@ -1,12 +1,58 @@
 @import "./theme.scss";
 
 .Header__Container {
-  height: 30vh;
+  height: 30vw;
   width: 100vw;
   background-color: $main_color;
   > h1 {
     padding: 3rem 6rem;
     font-size: 2.5rem;
     color: #3c3e45;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .Header__Container {
+    width: 115vw;
+    height: 75vw;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 410px) {
+  .Header__Container {
+    width: 115vw;
+    height: 50vw;
+  }
+}
+
+@media screen and (min-width: 410px) and (max-width: 1000px) {
+  .Header__Container {
+    width: 115vw;
+    height: 32.5vw;
+  }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
+  .Header__Container {
+    width: 115vw;
+    height: 22vw;
+  }
+}
+
+@media screen and (min-width: 1300px) and (max-width: 1700px) {
+  .Header__Container {
+    height: 17.5vw;
+  }
+}
+
+@media screen and (min-width: 1700px) and (max-width: 2100px) {
+  .Header__Container {
+    height: 16vw;
+  }
+}
+
+@media screen and (min-width: 2100px) {
+  .Header__Container {
+    height: 15vw;
   }
 }

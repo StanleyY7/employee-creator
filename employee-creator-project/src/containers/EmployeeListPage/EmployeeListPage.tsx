@@ -10,7 +10,7 @@ const EmployeeListPage = () => {
       <div>
         <section>
           <div className={generalStyles.Header__Container}>
-            <h1>Employee's list</h1>
+            <h1 className={styles.listHeading}>Employee's list</h1>
           </div>
 
           <div className={styles.EmployeeList__GridContainer}>
