@@ -1,6 +1,8 @@
 # Employee Creator Project (Full Stack)
 ![employeeCreator](https://user-images.githubusercontent.com/119549394/226088729-ffbcc9da-c0d4-4c2e-93ef-b76334b3ffce.png)
 
+<img width="250" src="https://github.com/StanleyY7/employee-creator/actions/workflows/spring-backend-tests.yml/badge.svg"/> 
+
 ## Overview
 
 This project involved creating a Full-Stack employee creator application using Spring Boot and Java for the backend and React, Typescript and SCSS for the frontend. The application allows for getting employee data from the backend to the frontend and for posting and/or deleting employee data from the frontend to the backend. It is also designed to be RESTful so that it can be scalable and to ensure that communication is efficient between the backend and frontend.
