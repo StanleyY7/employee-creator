@@ -28,9 +28,9 @@ This project involved creating a Full-Stack employee creator application using S
 
 1. Run the Frontend React application, by executing the following commands from the root folder of this project:
 
-      cd employee-creator-project
-      npm install
-      npm run dev
+       cd employee-creator-project
+       npm install
+       npm run dev
       
 ## Tech Stack
 
@@ -46,13 +46,35 @@ This project involved creating a Full-Stack employee creator application using S
 - TypeSript: For type-safe coding and identifying potential errors before running the frontend. 
 - SCSS: To create styled components that are modular and where the code can be nested where appropriate. 
 
-#### Libraries
+#### Libraries & Tools
 
 - React Hook Forms: To have more control over validation and to simplify form state and form submission.
 - Spring Test: To test the backend which is in a Spring environment, to ensure that the backend is functional and meets the requirements of the project.
+- Postman: To manually test the backend by making requests to it to ensure it was working.
 
 ## MVP
 
+#### The requirements of the application were
+
+- For it to enable the user to create, modify and delete employee data from the frontend to the backend.
+- For it to enable the user to see the employee data as a list on the frontend.
+- React + TypesSript frontend
+- Spring RESTful API backend
+
 ## Design
 
+We were given design snippets (below) for the frontend with how we create/structure it being left for us to determine.
+
+![Untitled design (27)](https://user-images.githubusercontent.com/119549394/226078173-1eb014fd-bf3e-4f1f-8559-032d0d4f36e7.png)
+
 ## Features
+
+- Post, Patch, Delete and Get of employee data.
+- Spring API backend.
+- React + TypeScript and SCSS for the frontend.
+- Testing
+
+#### To be implemented
+
+- Live hosting/deployment of frontend.
+- Live hosting/deployment of backend.
