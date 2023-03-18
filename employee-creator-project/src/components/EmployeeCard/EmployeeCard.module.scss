@@ -16,11 +16,13 @@
     }
     .EmployeeCard__Options {
       display: flex;
-      > a {
+
+      .editLink {
         padding: 0rem 0.25rem;
         text-decoration: underline;
         color: $link_color;
       }
+
       > p {
         padding: 0rem 0.25rem;
         text-decoration: underline;
@@ -31,10 +33,6 @@
       }
     }
   }
-}
-
-.divider {
-  color: #d3d2d7 !important;
 }
 
 @media screen and (max-width: 320px) {

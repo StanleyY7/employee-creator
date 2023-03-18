@@ -5,6 +5,7 @@ import MainPage from "./containers/MainPage/MainPage";
 import EmployeeListPage from "./containers/EmployeeListPage/EmployeeListPage";
 import CreateEmployeePage from "./containers/CreateEmployeePage/CreateEmployeePage";
 import { ContextProvider } from "./components/Context/Context";
+import EditEmployeePage from "./containers/EditEmployeePage/EditEmployeePage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -22,6 +23,10 @@ function App() {
               <Route
                 path="/add-employee"
                 element={<CreateEmployeePage />}
+              ></Route>
+              <Route
+                path="/edit-employee"
+                element={<EditEmployeePage />}
               ></Route>
             </Routes>
           </BrowserRouter>

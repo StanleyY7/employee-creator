@@ -1,6 +1,7 @@
 import styles from "./EmployeeCard.module.scss";
 import { deleteById } from "../../services/employee";
 import { getYearsDifference } from "../../services/general";
+import { NavLink } from "react-router-dom";
 
 const EmployeeCard = ({ employee, filterRemove }: any) => {
   const handleRemove = () => {
@@ -24,7 +25,9 @@ const EmployeeCard = ({ employee, filterRemove }: any) => {
           </div>
 
           <div className={styles.EmployeeCard__Options}>
-            <a href="#">Edit</a>
+            <NavLink className={styles.editLink} to="/edit-employee">
+              Edit
+            </NavLink>
             <p className={styles.divider}>|</p>
             <p onClick={handleRemove}>Remove</p>
           </div>
