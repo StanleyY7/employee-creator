@@ -27,6 +27,7 @@ public class PostsService {
 		String postContractType = data.getContractType().trim();
 		LocalDate postDatesEmployed = data.getDatesEmployed();
 		LocalDate postDatesEmployedEnd = data.getDatesEmployedEnd();
+		Boolean postOnGoing = data.getOnGoing();
 		String postEmploymentType = data.getEmploymentType().trim();
 		Number postHoursPW = data.getHoursPW();
 		
@@ -41,6 +42,7 @@ public class PostsService {
 		newPost.setContractType(postContractType);
 		newPost.setDatesEmployed(postDatesEmployed);
 		newPost.setDatesEmployedEnd(postDatesEmployedEnd);
+		newPost.setOnGoing(postOnGoing);
 		newPost.setEmploymentType(postEmploymentType);
 		newPost.setHoursPW(postHoursPW);
 		

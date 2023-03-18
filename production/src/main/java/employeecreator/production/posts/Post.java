@@ -49,6 +49,9 @@ public class Post {
 	
 	@Column
 	LocalDate datesEmployedEnd;
+	
+	@Column
+	Boolean onGoing;
 
 	@Column
 	String employmentType;
@@ -59,7 +62,7 @@ public class Post {
 	// Constructor
 
 	public Post(Long id, String firstName, String middleName, String lastName, String email, String phoneNumber,
-			String address, String contractType, LocalDate datesEmployed, LocalDate datesEmployedEnd, String employmentType, Number hoursPW) {
+			String address, String contractType, LocalDate datesEmployed, LocalDate datesEmployedEnd, Boolean onGoing, String employmentType, Number hoursPW) {
 		super();
 		Id = id;
 		this.firstName = firstName;
@@ -71,6 +74,7 @@ public class Post {
 		this.contractType = contractType;
 		this.datesEmployed = datesEmployed;
 		this.datesEmployedEnd = datesEmployedEnd;
+		this.onGoing = onGoing;
 		this.employmentType = employmentType;
 		this.hoursPW = hoursPW;
 	}
@@ -158,7 +162,15 @@ public class Post {
 	public void setDatesEmployedEnd(LocalDate postDatesEmployedEnd) {
 		this.datesEmployedEnd = postDatesEmployedEnd;
 	}
+	
+	public Boolean getOnGoing() {
+		return onGoing;
+	}
 
+	public void setOnGoing(Boolean onGoing) {
+		this.onGoing = onGoing;
+	}
+	
 
 	public String getEmploymentType() {
 		return employmentType;

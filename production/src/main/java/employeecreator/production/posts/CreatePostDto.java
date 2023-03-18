@@ -36,7 +36,11 @@ String contractType;
 @NotNull
 LocalDate datesEmployedFirst;
 
+@NotNull
 LocalDate datesEmployedEnd;
+
+@NotNull
+Boolean onGoing;
 
 @NotBlank
 String employmentType;
@@ -116,6 +120,14 @@ public LocalDate getDatesEmployedEnd() {
 
 public void setDatesEmployedEnd(LocalDate datesEmployedEnd) {
 	this.datesEmployedEnd = datesEmployedEnd;
+}
+
+public Boolean getOnGoing() {
+	return onGoing;
+}
+
+public void setOnGoing(Boolean onGoing) {
+	this.onGoing = onGoing;
 }
 
 public String getEmploymentType() {
