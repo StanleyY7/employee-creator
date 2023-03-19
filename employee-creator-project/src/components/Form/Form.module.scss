@@ -92,7 +92,7 @@ input[type="checkbox"]:checked + label {
   }
   .input__mobile {
     @extend .input__text;
-    margin-left: -4rem;
+    margin-left: -1.8rem;
     padding: 0.7rem 2rem 0.7rem 5rem;
     width: 6rem;
     z-index: 1;

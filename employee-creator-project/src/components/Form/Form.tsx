@@ -7,6 +7,8 @@ import PISection from "../PISection/PISection";
 import { CDSection } from "../CDSection/CDSection";
 import { ESSection } from "../ESSection/ESSection";
 import { ButtonsContainer } from "../ButtonsContainer/ButtonsContainer";
+import { useContext } from "react";
+import { FormContext } from "../Context/Context";
 
 const Form = () => {
   const {
@@ -15,10 +17,11 @@ const Form = () => {
     setValue,
     formState: { errors },
   } = useForm<FormTypes>();
+  const { edit } = useContext(FormContext);
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmitData)}
+      onSubmit={handleSubmit(edit ? () => {} : onSubmitData)}
       className={styles.Form__container}
     >
       <PISection register={register} errors={errors} />

@@ -1,6 +1,7 @@
 import { FormTypes } from "../types/form";
 import { SubmitHandler } from "react-hook-form";
-import { postEmployee } from "./employee";
+import { patchById, postEmployee } from "./employee";
+
 // Converting Value of Dates from Form
 
 const currentDate = new Date();
@@ -39,7 +40,7 @@ export const onSubmitData: SubmitHandler<FormTypes> = async (
     phoneNumber: data.phoneNumber,
     address: data.address,
     contractType: data.contractType,
-    datesEmployed: combineStartDate(data),
+    datesEmployedFirst: combineStartDate(data),
     datesEmployedEnd: "" ? "current employee" : combineEndDate(data),
     employmentType: data.employmentType,
     onGoing: data.onGoing,
