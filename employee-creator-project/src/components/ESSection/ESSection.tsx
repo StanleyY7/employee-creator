@@ -21,6 +21,8 @@ export const ESSection = ({ register, errors, setValue }: any) => {
     setPermanent,
     clicked,
     setClicked,
+    edit,
+    selectEmployee,
   } = useContext(FormContext);
   return (
     <>
@@ -34,6 +36,11 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               type="checkbox"
               id="contract"
               value="Permanent"
+              defaultChecked={
+                edit && selectEmployee.contractType === "Permanent"
+                  ? true
+                  : false
+              }
               {...register("contractType")}
               onChange={(e) => {
                 setPermanent(true);
@@ -52,6 +59,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
             type="checkbox"
             id="contractType2"
             value="Contract"
+            defaultChecked={
+              edit && selectEmployee.contractType === "Contract" ? true : false
+            }
             {...register("contractType")}
             onChange={(e) => {
               setContract(true);
@@ -85,6 +95,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               onChange={(event) => {
                 setValue("startDay", event.target.value);
               }}
+              defaultValue={
+                edit ? selectEmployee.datesEmployed.split("-")[2] : ""
+              }
             ></input>
           </div>
 
@@ -92,7 +105,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
             <p className={styles.months}>Month</p>
             <select
               {...register("startMonth", { required: true })}
-              name="startMonth"
+              defaultValue={
+                edit ? selectEmployee.datesEmployed.split("-")[1] : "01"
+              }
               onChange={(event) => {
                 setValue("startMonth", event.target.value);
               }}
@@ -118,6 +133,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               type="number"
               min="1970"
               max="3000"
+              defaultValue={
+                edit ? selectEmployee.datesEmployed.split("-")[0] : ""
+              }
               {...register("startYear", { required: true })}
               maxLength={4}
               onChange={(event) => {
@@ -140,6 +158,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
                   type="number"
                   min="1"
                   max="31"
+                  defaultValue={
+                    edit ? selectEmployee.datesEmployedEnd.split("-")[2] : ""
+                  }
                   {...register("endDay", { required: true })}
                   onChange={(event) => {
                     setValue("endDay", event.target.value);
@@ -152,6 +173,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
                 <select
                   {...register("endMonth", { required: true })}
                   name="endMonth"
+                  defaultValue={
+                    edit ? selectEmployee.datesEmployedEnd.split("-")[1] : "01"
+                  }
                   onChange={(event) => {
                     setValue("endMonth", event.target.value);
                   }}
@@ -177,6 +201,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
                   type="number"
                   min="1970"
                   max="3000"
+                  defaultValue={
+                    edit ? selectEmployee.datesEmployedEnd.split("-")[0] : ""
+                  }
                   {...register("endYear", { required: true })}
                   maxLength={4}
                   onChange={(event) => {
@@ -195,6 +222,11 @@ export const ESSection = ({ register, errors, setValue }: any) => {
           <input
             type="checkbox"
             className={styles.checkbox__normal}
+            defaultChecked={
+              edit && selectEmployee.onGoing === true
+                ? (() => setClicked(!clicked)) && true
+                : false
+            }
             {...register("onGoing")}
             onChange={() => {
               setClicked(!clicked);
@@ -214,6 +246,11 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               type="checkbox"
               id="employmentType"
               value="Full-time"
+              defaultChecked={
+                edit && selectEmployee.employmentType === "Full-time"
+                  ? true
+                  : false
+              }
               {...register("employmentType", { required: true })}
               onChange={(e) => {
                 setFulltime(true);
@@ -234,6 +271,11 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               type="checkbox"
               id="employmentType2"
               value="Part-time"
+              defaultChecked={
+                edit && selectEmployee.employmentType === "Part-time"
+                  ? true
+                  : false
+              }
               {...register("employmentType", { required: true })}
               onChange={(e) => {
                 setPartTime(true);
@@ -258,7 +300,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
           type="number"
           min="0"
           max="168"
-          id="hoursPW"
+          defaultValue={edit ? selectEmployee.hoursPW : ""}
           className={styles.input__hours}
           {...register("hoursPW")}
         ></input>

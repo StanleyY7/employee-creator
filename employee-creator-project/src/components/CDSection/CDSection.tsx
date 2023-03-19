@@ -1,6 +1,8 @@
 import styles from "../Form/Form.module.scss";
-
+import { useContext } from "react";
+import { FormContext } from "../Context/Context";
 export const CDSection = ({ register, errors }: any) => {
+  const { edit, selectEmployee } = useContext(FormContext);
   return (
     <div>
       <h2>Contact Details</h2>
@@ -10,6 +12,7 @@ export const CDSection = ({ register, errors }: any) => {
         type="email"
         className={styles.input__email}
         placeholder="sam.riley@gmail.com"
+        defaultValue={edit ? selectEmployee.email : ""}
         maxLength={254}
         {...register("email", { required: true })}
       ></input>
@@ -25,7 +28,7 @@ export const CDSection = ({ register, errors }: any) => {
         <input
           className={styles.input__mobile}
           maxLength={10}
-          id="phoneNumber"
+          defaultValue={edit ? selectEmployee.phoneNumber : ""}
           placeholder="04123456789"
           {...register("phoneNumber", { required: true })}
         ></input>
@@ -40,6 +43,7 @@ export const CDSection = ({ register, errors }: any) => {
       <input
         className={styles.input__address}
         placeholder="123 Example Street, Sydney NSW 2000"
+        defaultValue={edit ? selectEmployee.address : ""}
         maxLength={200}
         {...register("address", { required: true })}
       ></input>
