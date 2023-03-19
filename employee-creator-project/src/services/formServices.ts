@@ -1,6 +1,6 @@
 import { FormTypes } from "../types/form";
 import { SubmitHandler } from "react-hook-form";
-import { patchById, postEmployee } from "./employee";
+import { postEmployee } from "./employee";
 
 // Converting Value of Dates from Form
 
@@ -10,9 +10,9 @@ export const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
 export const currentYear = "2023";
 
 export const combineStartDate = (data: any) => {
-  const day = data.startDay ?? currentDay;
-  const month = data.startMonth ?? currentMonth;
-  const year = data.startYear ?? currentYear;
+  const day = data.startDay ?? "";
+  const month = data.startMonth ?? "";
+  const year = data.startYear ?? "";
   const date = new Date(`${year}-${month}-${day}`);
   return date;
 };
@@ -41,7 +41,7 @@ export const onSubmitData: SubmitHandler<FormTypes> = async (
     address: data.address,
     contractType: data.contractType,
     datesEmployedFirst: combineStartDate(data),
-    datesEmployedEnd: "" ? "current employee" : combineEndDate(data),
+    datesEmployedEnd: combineEndDate(data),
     employmentType: data.employmentType,
     onGoing: data.onGoing,
     hoursPW: data.hoursPW,
