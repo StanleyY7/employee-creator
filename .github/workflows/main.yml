@@ -14,9 +14,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd ./employee-creator/employee-creator-project
+        cd ./employee-creator-project
         npm install
     - name: Run tests
       run: |
-        cd ./employee-creator/employee-creator-project
+        cd ./employee-creator-project
         npm run test
