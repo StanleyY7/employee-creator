@@ -25,11 +25,11 @@ export const postEmployee = async (newEmployee: FormTypes) => {
       alert("success!");
       window.location.reload();
     } else {
+      alert("unable to submit");
       const errorMessage = await postData.text();
       throw new Error(errorMessage);
     }
   } catch (e) {
-    alert("error, unable to submit!");
     console.log(e);
   }
 };
