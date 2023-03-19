@@ -1,7 +1,7 @@
 # Employee Creator Project (Full Stack)
 ![employeeCreator](https://user-images.githubusercontent.com/119549394/226088729-ffbcc9da-c0d4-4c2e-93ef-b76334b3ffce.png)
 
-<img width="250" src="https://github.com/StanleyY7/employee-creator/actions/workflows/spring-backend.yml/badge.svg"/> 
+<span><img width="250" src="https://github.com/StanleyY7/employee-creator/actions/workflows/spring-backend.yml/badge.svg"/> <img width="250" src="https://github.com/StanleyY7/employee-creator/actions/workflows/main.yml/badge.svg"/> </span>
 
 ## Overview
 
