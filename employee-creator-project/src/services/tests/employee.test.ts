@@ -1,7 +1,7 @@
 import { getAll, postEmployee, deleteById, patchById } from "../employee";
 import { FormTypes } from "../../types/form";
 
-const employeeData: FormTypes = {
+export const employeeData: FormTypes = {
   id: 1,
   firstName: "Tessa",
   middleName: "test",
