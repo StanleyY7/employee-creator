@@ -1,4 +1,4 @@
-import { getAll, postEmployee, deleteById } from "../employee";
+import { getAll, postEmployee, deleteById, patchById } from "../employee";
 import { FormTypes } from "../../types/form";
 
 const employeeData: FormTypes = {
@@ -42,6 +42,8 @@ beforeEach(() => {
   global.fetch = jest.fn();
 });
 
+// GET
+
 describe("getAll Test", () => {
   it("should fetch data from the backend", async () => {
     const mockResponse = [employeeData];
@@ -60,10 +62,13 @@ describe("getAll Test", () => {
   });
 });
 
+// POST
+
 describe("postEmployee Test", () => {
   it("should post data to the backend", async () => {
     const mockResponse = [employeeData];
     const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    global.alert = jest.fn();
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
       json: jest.fn().mockResolvedValue(mockResponse),
@@ -77,12 +82,35 @@ describe("postEmployee Test", () => {
       },
       body: JSON.stringify(employeeData),
     });
-    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith("Success!");
     expect(logSpy).toHaveBeenCalledWith(mockResponse);
 
     logSpy.mockRestore();
   });
 });
+
+// PATCH
+
+describe("patchById", () => {
+  it("should update the employee by id", async () => {
+    const mockResponse = { employeeRequest };
+    const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    global.alert = jest.fn();
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue(mockResponse),
+    });
+
+    const result = await patchById(employeeData);
+
+    expect(logSpy).toHaveBeenCalledWith(`Employee updated!`);
+    expect(alert).toHaveBeenCalledWith(`Employee updated!`);
+    expect(result).toBe(true);
+  });
+});
+
+// DELETE
 
 describe("deleteById Test", () => {
   it("Should delete the employee when the id is passed in", async () => {

@@ -22,7 +22,7 @@ export const postEmployee = async (newEmployee: FormTypes) => {
     if (postData.ok) {
       const response = await postData.json();
       console.log(response);
-      alert("success!");
+      alert("Success!");
       window.location.reload();
     } else {
       alert("unable to submit");
@@ -60,12 +60,14 @@ export const patchById = async (data: any) => {
       hoursPW: data.hoursPW,
     }),
   });
-  if (response.ok) {
-    alert("Employee updated!");
-  } else {
+
+  console.log(`Employee updated!`);
+  alert("Employee updated!");
+  if (!response.ok) {
     throw new Error("Couldn't update employee with id of " + data.id);
   }
-  return true;
+
+  return await true;
 };
 
 // DELETE
