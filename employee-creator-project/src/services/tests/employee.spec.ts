@@ -1,4 +1,4 @@
-import { getAll, postEmployee } from "../employee";
+import { getAll, postEmployee, deleteById } from "../employee";
 import { FormTypes } from "../../types/form";
 
 const employeeData: FormTypes = {
@@ -38,6 +38,10 @@ const employeeRequest = {
   hoursPW: 35,
 };
 
+beforeEach(() => {
+  global.fetch = jest.fn();
+});
+
 describe("getAll Test", () => {
   it("should fetch data from the backend", async () => {
     const mockResponse = [employeeData];
@@ -51,6 +55,7 @@ describe("getAll Test", () => {
     const data = await getAll();
 
     expect(fetch).toHaveBeenCalledWith("http://localhost:8080/posts");
+    expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(data).toEqual(mockResponse);
   });
 });
@@ -72,9 +77,30 @@ describe("postEmployee Test", () => {
       },
       body: JSON.stringify(employeeData),
     });
-
+    expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(logSpy).toHaveBeenCalledWith(mockResponse);
 
     logSpy.mockRestore();
+  });
+});
+
+describe("deleteById Test", () => {
+  it("Should delete the employee when the id is passed in", async () => {
+    const mockResponse = {};
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue(mockResponse),
+    });
+    const idToDelete = 1;
+    const result = await deleteById(idToDelete);
+
+    expect(result).toBe(true);
+    expect(fetch).toHaveBeenCalledWith(
+      `http://localhost:8080/posts/${idToDelete}`,
+      {
+        method: "DELETE",
+      }
+    );
+    expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 });
