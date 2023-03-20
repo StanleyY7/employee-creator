@@ -26,8 +26,6 @@ export const postEmployee = async (newEmployee: FormTypes) => {
       window.location.reload();
     } else {
       alert("unable to submit");
-      const errorMessage = await postData.text();
-      throw new Error(errorMessage);
     }
   } catch (e) {
     console.log(e);
@@ -64,7 +62,7 @@ export const patchById = async (data: any) => {
   console.log(`Employee updated!`);
   alert("Employee updated!");
   if (!response.ok) {
-    throw new Error("Couldn't update employee with id of " + data.id);
+    alert("Couldn't update employee with id of " + data.id);
   }
 
   return await true;
@@ -76,7 +74,7 @@ export const deleteById = async (id: any) => {
     method: "DELETE",
   });
   if (!response.ok) {
-    throw new Error("Couldn't find employee with id of" + id);
+    alert("Couldn't find employee with id of " + id.id);
   }
   return await true;
 };

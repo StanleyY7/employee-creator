@@ -23,6 +23,28 @@ const employeeData: FormTypes = {
   datesEmployedEnd: "2023-01-01",
 };
 
+const badRequest: FormTypes = {
+  id: 1,
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  email: "",
+  phoneNumber: "",
+  address: "123 fake address lane, NSW, 2250",
+  contractType: "Contract",
+  startDay: "01",
+  startMonth: "01",
+  startYear: "2000",
+  endDay: "01",
+  endMonth: "01",
+  endYear: "2023",
+  onGoing: true,
+  employmentType: "Full-Time",
+  hoursPW: 35,
+  datesEmployed: "2000-01-01",
+  datesEmployedEnd: "2023-01-01",
+};
+
 const employeeRequest = {
   firstName: "Tessa",
   middleName: "test",
@@ -40,6 +62,7 @@ const employeeRequest = {
 
 beforeEach(() => {
   global.fetch = jest.fn();
+  global.alert = jest.fn();
 });
 
 // GET
@@ -57,18 +80,17 @@ describe("getAll Test", () => {
     const data = await getAll();
 
     expect(fetch).toHaveBeenCalledWith("http://localhost:8080/posts");
-    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(1);
     expect(data).toEqual(mockResponse);
   });
 });
 
 // POST
 
-describe("postEmployee Test", () => {
+describe("postEmployee Tests", () => {
   it("should post data to the backend", async () => {
     const mockResponse = [employeeData];
     const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
-    global.alert = jest.fn();
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
       json: jest.fn().mockResolvedValue(mockResponse),
@@ -88,15 +110,24 @@ describe("postEmployee Test", () => {
 
     logSpy.mockRestore();
   });
+
+  it("should display an error if bad request", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      json: jest.fn().mockResolvedValue(badRequest),
+    });
+
+    await postEmployee(badRequest);
+    expect(alert).toHaveBeenCalledWith("unable to submit");
+  });
 });
 
 // PATCH
 
-describe("patchById", () => {
+describe("patchById Tests", () => {
   it("should update the employee by id", async () => {
     const mockResponse = { employeeRequest };
     const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
-    global.alert = jest.fn();
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
       json: jest.fn().mockResolvedValue(mockResponse),
@@ -107,6 +138,18 @@ describe("patchById", () => {
     expect(logSpy).toHaveBeenCalledWith(`Employee updated!`);
     expect(alert).toHaveBeenCalledWith(`Employee updated!`);
     expect(result).toBe(true);
+  });
+
+  it("should return an error for a bad request", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      json: jest.fn().mockResolvedValue(badRequest),
+    });
+
+    await patchById(badRequest);
+    expect(alert).toHaveBeenCalledWith(
+      "Couldn't update employee with id of " + badRequest.id
+    );
   });
 });
 
@@ -129,6 +172,19 @@ describe("deleteById Test", () => {
         method: "DELETE",
       }
     );
-    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("should return an error for a bad request", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      json: jest.fn().mockResolvedValue(badRequest),
+    });
+
+    await deleteById(badRequest);
+
+    expect(alert).toHaveBeenCalledWith(
+      `Couldn't find employee with id of ${badRequest.id}`
+    );
   });
 });
