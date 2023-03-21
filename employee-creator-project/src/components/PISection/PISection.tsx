@@ -25,7 +25,6 @@ const PISection = ({ register, errors }: any) => {
       <input
         className={styles.input__text}
         type="text"
-        id="middleName"
         defaultValue={edit ? selectEmployee.middleName : ""}
         {...register("middleName")}
       ></input>
