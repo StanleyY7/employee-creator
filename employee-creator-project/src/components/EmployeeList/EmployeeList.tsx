@@ -1,12 +1,19 @@
-import { useContext, useEffect } from "react";
-import { FormContext } from "../Context/Context";
-import EmployeeCard from "../EmployeeCard/EmployeeCard";
+import { useEffect } from "react";
 
+import EmployeeCard from "../EmployeeCard/EmployeeCard";
+import { setEmployees } from "../Redux/formSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useQuery } from "react-query";
+import { getAll } from "../../services/employee";
 const EmployeeList = () => {
-  const { data, setEmployees, employees } = useContext(FormContext);
+  const employees = useSelector((state: any) => state.form.employees);
+
+  const { data } = useQuery("getEmployees", getAll);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setEmployees(data);
+    dispatch(setEmployees(data));
   }, [data]);
 
   const filterRemove = (id: any) => {

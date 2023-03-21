@@ -1,8 +1,10 @@
 import styles from "../Form/Form.module.scss";
-import { useContext } from "react";
-import { FormContext } from "../Context/Context";
+import { useSelector } from "react-redux";
 export const CDSection = ({ register, errors }: any) => {
-  const { edit, selectEmployee } = useContext(FormContext);
+  const edit = useSelector((state: any) => state.form.edit);
+
+  const selectEmployee = useSelector((state: any) => state.form.selectEmployee);
+
   return (
     <div>
       <h2>Contact Details</h2>

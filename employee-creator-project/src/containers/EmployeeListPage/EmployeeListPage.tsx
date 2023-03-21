@@ -3,11 +3,11 @@ import generalStyles from "../../App.module.scss";
 import EmployeeList from "../../components/EmployeeList/EmployeeList";
 
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { FormContext } from "../../components/Context/Context";
+import { useDispatch } from "react-redux";
+import { setEdit } from "../../components/Redux/formSlice";
 
 const EmployeeListPage = () => {
-  const { setEdit } = useContext(FormContext);
+  const dispatch = useDispatch();
   return (
     <>
       <div>
@@ -25,7 +25,7 @@ const EmployeeListPage = () => {
                 <NavLink to="/add-employee">
                   <button
                     className={styles.EmployeeList__Button}
-                    onClick={() => setEdit(false)}
+                    onClick={() => dispatch(setEdit(false))}
                   >
                     Add Employee
                   </button>

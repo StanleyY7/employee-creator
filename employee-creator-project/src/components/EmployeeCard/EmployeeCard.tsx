@@ -2,15 +2,16 @@ import styles from "./EmployeeCard.module.scss";
 import { deleteById } from "../../services/employee";
 import { getYearsDifference } from "../../services/general";
 import { NavLink } from "react-router-dom";
-import { FormContext } from "../Context/Context";
-import { useContext } from "react";
+
+import { setSelectEmployee, setEdit } from "../Redux/formSlice";
+import { useDispatch } from "react-redux";
 
 const EmployeeCard = ({ employee, filterRemove }: any) => {
+  const dispatch = useDispatch();
   const handleRemove = () => {
     deleteById(employee.id);
     filterRemove(employee.id);
   };
-  const { setSelectEmployee, setEdit } = useContext(FormContext);
 
   return (
     <>
@@ -30,8 +31,8 @@ const EmployeeCard = ({ employee, filterRemove }: any) => {
           <div className={styles.EmployeeCard__Options}>
             <NavLink
               onClick={() => {
-                setSelectEmployee(employee);
-                setEdit(true);
+                dispatch(setSelectEmployee(employee));
+                dispatch(setEdit(true));
               }}
               className={styles.editLink}
               to="/edit-employee"

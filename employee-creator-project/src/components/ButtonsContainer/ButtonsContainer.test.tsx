@@ -2,12 +2,15 @@ import { ButtonsContainer } from "./ButtonsContainer";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { MemoryRouter } from "react-router-dom";
-
+import { Provider } from "react-redux";
+import { store } from "../Redux/Store";
 const renderButtonsContainer = () => {
   render(
-    <MemoryRouter>
-      <ButtonsContainer />
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <ButtonsContainer />
+      </MemoryRouter>
+    </Provider>
   );
 };
 
