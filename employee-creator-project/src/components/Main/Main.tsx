@@ -1,5 +1,6 @@
 import styles from "./Main.module.scss";
 import { NavLink } from "react-router-dom";
+
 const Main = () => {
   return (
     <>

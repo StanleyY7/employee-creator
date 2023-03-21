@@ -183,8 +183,6 @@ describe("deleteById Test", () => {
 
     await deleteById(badRequest);
 
-    expect(alert).toHaveBeenCalledWith(
-      `Couldn't find employee with id of ${badRequest.id}`
-    );
+    expect(alert).toHaveBeenCalledWith(`unable to delete`);
   });
 });

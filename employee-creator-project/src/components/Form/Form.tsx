@@ -7,17 +7,17 @@ import PISection from "../PISection/PISection";
 import { CDSection } from "../CDSection/CDSection";
 import { ESSection } from "../ESSection/ESSection";
 import { ButtonsContainer } from "../ButtonsContainer/ButtonsContainer";
-import { useContext } from "react";
-import { FormContext } from "../Context/Context";
+import { useSelector } from "react-redux";
 
 const Form = () => {
+  const edit = useSelector((state: any) => state.form.edit);
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm<FormTypes>();
-  const { edit } = useContext(FormContext);
 
   return (
     <form

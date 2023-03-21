@@ -1,29 +1,30 @@
 import styles from "../Form/Form.module.scss";
-import { useContext } from "react";
-import { FormContext } from "../Context/Context";
 import {
   currentDay,
   currentMonth,
   currentYear,
 } from "../../services/formServices";
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setPermanent,
+  setContract,
+  setClicked,
+  setPartTime,
+  setFulltime,
+} from "../Redux/formSlice";
 export const ESSection = ({ register, errors, setValue }: any) => {
-  // State
+  const fullTime = useSelector((state: any) => state.form.fullTime);
+  const partTime = useSelector((state: any) => state.form.partTime);
+  const contract = useSelector((state: any) => state.form.contract);
+  const permanent = useSelector((state: any) => state.form.permanent);
 
-  const {
-    fullTime,
-    setFulltime,
-    partTime,
-    setPartTime,
-    contract,
-    setContract,
-    permanent,
-    setPermanent,
-    clicked,
-    setClicked,
-    edit,
-    selectEmployee,
-  } = useContext(FormContext);
+  const clicked = useSelector((state: any) => state.form.clicked);
+
+  const edit = useSelector((state: any) => state.form.edit);
+
+  const selectEmployee = useSelector((state: any) => state.form.selectEmployee);
+
+  const dispatch = useDispatch();
   return (
     <>
       <div className={styles.employeeStatus__wrapper}>
@@ -43,7 +44,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               }
               {...register("contractType")}
               onChange={(e) => {
-                setPermanent(true);
+                dispatch(setPermanent(true));
                 setValue("contractType", e.target.checked ? "Permanent" : "");
               }}
             ></input>
@@ -64,7 +65,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
             }
             {...register("contractType")}
             onChange={(e) => {
-              setContract(true);
+              dispatch(setContract(true));
               setValue("contractType", e.target.checked ? "Contract" : "");
             }}
           ></input>
@@ -229,7 +230,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
             }
             {...register("onGoing")}
             onChange={() => {
-              setClicked(!clicked);
+              dispatch(setClicked(!clicked));
               setValue("endDay", currentDay);
               setValue("endMonth", currentMonth);
               setValue("endYear", currentYear);
@@ -253,7 +254,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               }
               {...register("employmentType", { required: true })}
               onChange={(e) => {
-                setFulltime(true);
+                dispatch(setFulltime(true));
                 setValue("employmentType", e.target.checked ? "Full-time" : "");
               }}
             ></input>
@@ -278,7 +279,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               }
               {...register("employmentType", { required: true })}
               onChange={(e) => {
-                setPartTime(true);
+                dispatch(setPartTime(true));
                 setValue("employmentType", e.target.checked ? "Part-time" : "");
               }}
             ></input>

@@ -4,12 +4,16 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { employeeData } from "../../services/tests/employee.test";
 import { getYearsDifference } from "../../services/general";
+import { Provider } from "react-redux";
+import { store } from "../Redux/Store";
 
 const renderEmployeeCard = () => {
   render(
-    <MemoryRouter>
-      <EmployeeCard employee={employeeData} />
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <EmployeeCard employee={employeeData} />
+      </MemoryRouter>
+    </Provider>
   );
 };
 

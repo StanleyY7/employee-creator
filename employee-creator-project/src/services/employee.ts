@@ -23,6 +23,7 @@ export const postEmployee = async (newEmployee: FormTypes) => {
       const response = await postData.json();
       console.log(response);
       alert("Success!");
+      window.location.href = window.location.href;
     } else {
       alert("unable to submit");
     }
@@ -72,8 +73,10 @@ export const deleteById = async (id: any) => {
   const response = await fetch("http://localhost:8080/posts/" + id, {
     method: "DELETE",
   });
-  if (!response.ok) {
-    alert("Couldn't find employee with id of " + id.id);
+  if (response.ok) {
+    alert("employee deleted!");
+  } else if (!response.ok) {
+    alert("unable to delete");
   }
   return await true;
 };

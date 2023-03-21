@@ -1,11 +1,14 @@
 import styles from "../Form/Form.module.scss";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { FormContext } from "../Context/Context";
+
 import { patchById } from "../../services/employee";
+import { useSelector } from "react-redux";
 
 export const ButtonsContainer = () => {
-  const { edit, selectEmployee } = useContext(FormContext);
+  const edit = useSelector((state: any) => state.form.edit);
+
+  const selectEmployee = useSelector((state: any) => state.form.selectEmployee);
+
   return (
     <>
       <div>
