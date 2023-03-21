@@ -5,9 +5,8 @@ import MainPage from "./containers/MainPage/MainPage";
 import EmployeeListPage from "./containers/EmployeeListPage/EmployeeListPage";
 import CreateEmployeePage from "./containers/CreateEmployeePage/CreateEmployeePage";
 import EditEmployeePage from "./containers/EditEmployeePage/EditEmployeePage";
-
+export const queryClient = new QueryClient();
 function App() {
-  const queryClient = new QueryClient();
   return (
     <>
       <QueryClientProvider client={queryClient}>

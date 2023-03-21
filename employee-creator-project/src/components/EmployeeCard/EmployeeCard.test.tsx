@@ -1,11 +1,13 @@
-import EmployeeCard from "./EmployeeCard";
 import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import { employeeData } from "../../services/tests/employee.test";
 import { getYearsDifference } from "../../services/general";
 import { Provider } from "react-redux";
 import { store } from "../Redux/Store";
+
+import EmployeeCard from "./EmployeeCard";
+
+import "@testing-library/jest-dom/extend-expect";
 
 const renderEmployeeCard = () => {
   render(
