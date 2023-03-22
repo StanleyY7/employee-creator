@@ -12,6 +12,8 @@ import {
   setPartTime,
   setFullTime,
 } from "../Redux/formSlice";
+import { useEffect } from "react";
+
 export const ESSection = ({ register, errors, setValue }: any) => {
   const fullTime = useSelector((state: any) => state.form.fullTime);
   const partTime = useSelector((state: any) => state.form.partTime);
@@ -25,6 +27,13 @@ export const ESSection = ({ register, errors, setValue }: any) => {
   const selectEmployee = useSelector((state: any) => state.form.selectEmployee);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (edit && selectEmployee.onGoing) {
+      dispatch(setClicked(true));
+    }
+  }, []);
+
   return (
     <>
       <div className={styles.employeeStatus__wrapper}>
@@ -224,9 +233,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
             type="checkbox"
             className={styles.checkbox__normal}
             defaultChecked={
-              edit && selectEmployee.onGoing === true
-                ? (() => setClicked(!clicked)) && true
-                : false
+              edit && selectEmployee.onGoing === true ? true : false
             }
             {...register("onGoing")}
             onChange={() => {

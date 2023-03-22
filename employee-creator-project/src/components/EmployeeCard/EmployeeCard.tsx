@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 
 const EmployeeCard = ({ employee, filterRemove }: any) => {
   const dispatch = useDispatch();
+
   const handleRemove = () => {
     deleteById(employee.id);
     filterRemove(employee.id);
@@ -31,8 +32,8 @@ const EmployeeCard = ({ employee, filterRemove }: any) => {
           <div className={styles.EmployeeCard__Options}>
             <NavLink
               onClick={() => {
-                dispatch(setSelectEmployee(employee));
                 dispatch(setEdit(true));
+                dispatch(setSelectEmployee(employee));
               }}
               className={styles.editLink}
               to="/edit-employee"
