@@ -10,7 +10,7 @@ export const formSlice = createSlice({
     clicked: false,
     employees: [],
     edit: false,
-    selectEmployee: null,
+    selectEmployee: [],
     data: [],
   },
   reducers: {

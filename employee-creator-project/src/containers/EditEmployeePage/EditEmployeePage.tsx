@@ -3,13 +3,15 @@ import generalStyles from "../../App.module.scss";
 import styles from "../CreateEmployeePage/CreateEmployeePage.module.scss";
 import BackButton from "../../components/BackButton/BackButton";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setEdit } from "../../components/Redux/formSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setEdit, setSelectEmployee } from "../../components/Redux/formSlice";
 
 const EditEmployeePage = () => {
   const dispatch = useDispatch();
+  const employee = useSelector((state: any) => state.form.selectEmployee);
   useEffect(() => {
     dispatch(setEdit(true));
+    dispatch(setSelectEmployee(employee));
   }, []);
   return (
     <>
