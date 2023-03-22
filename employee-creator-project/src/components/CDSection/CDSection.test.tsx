@@ -29,6 +29,7 @@ describe("CDSection test", () => {
     renderCDSection(register, errors);
 
     const heading = screen.getByText("Contact Details");
+
     expect(heading).toBeInTheDocument();
 
     // Email Address
@@ -59,6 +60,7 @@ describe("CDSection test", () => {
     // All
 
     const values = screen.getAllByDisplayValue("");
+
     expect(values.length).toBe(3);
   });
 });

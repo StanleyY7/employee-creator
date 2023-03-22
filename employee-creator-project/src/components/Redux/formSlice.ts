@@ -14,7 +14,7 @@ export const formSlice = createSlice({
     data: [],
   },
   reducers: {
-    setFulltime: (state, action) => {
+    setFullTime: (state, action) => {
       state.fullTime = action.payload;
     },
     setPartTime: (state, action) => {
@@ -45,7 +45,7 @@ export const formSlice = createSlice({
 });
 
 export const {
-  setFulltime,
+  setFullTime,
   setPartTime,
   setContract,
   setPermanent,

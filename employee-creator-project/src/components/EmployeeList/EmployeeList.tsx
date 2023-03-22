@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import EmployeeCard from "../EmployeeCard/EmployeeCard";
-import { setEmployees } from "../Redux/formSlice";
+import { setEmployees, setClicked } from "../Redux/formSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 import { getAll } from "../../services/employee";
@@ -14,6 +14,9 @@ const EmployeeList = () => {
 
   useEffect(() => {
     dispatch(setEmployees(data));
+
+    // resetting onGoing value
+    dispatch(setClicked(false));
   }, [data]);
 
   const filterRemove = (id: any) => {
@@ -25,6 +28,7 @@ const EmployeeList = () => {
       {employees &&
         employees.map((employee: any) => (
           <EmployeeCard
+            data-testid="EmployeeCard"
             employee={employee}
             key={employee.id}
             filterRemove={filterRemove}
