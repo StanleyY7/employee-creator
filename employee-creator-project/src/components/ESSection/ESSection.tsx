@@ -10,7 +10,7 @@ import {
   setContract,
   setClicked,
   setPartTime,
-  setFulltime,
+  setFullTime,
 } from "../Redux/formSlice";
 export const ESSection = ({ register, errors, setValue }: any) => {
   const fullTime = useSelector((state: any) => state.form.fullTime);
@@ -254,7 +254,7 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               }
               {...register("employmentType", { required: true })}
               onChange={(e) => {
-                dispatch(setFulltime(true));
+                dispatch(setFullTime(true));
                 setValue("employmentType", e.target.checked ? "Full-time" : "");
               }}
             ></input>
