@@ -21,9 +21,10 @@ describe("Form Test", () => {
   test("Form should render with components", () => {
     renderForm();
 
-    // Personal Information Section
+    /* Personal Information Section */
 
     // First Name
+
     const heading = screen.getByText("Personal Information");
     const firstNameLabel = screen.getByText("First name");
     const firstNamePlaceholder = screen.getByPlaceholderText("John");
@@ -33,11 +34,13 @@ describe("Form Test", () => {
     expect(firstNamePlaceholder).toBeInTheDocument();
 
     // Middle Name
+
     const middleNameLabel = screen.getByText("Middle name (if applicable)");
 
     expect(middleNameLabel).toBeInTheDocument();
 
     // Last Name
+
     const lastNameLabel = screen.getByText("Last name");
     const lastNamePlaceholder = screen.getByPlaceholderText("Smith");
 
@@ -45,16 +48,7 @@ describe("Form Test", () => {
 
     expect(lastNamePlaceholder).toBeInTheDocument();
 
-    // Contact Details Section
-
-    // Employee Status Section
-
-    // All
-
-    const values = screen.getAllByDisplayValue("");
-    expect(values.length).toBe(12);
-
-    // Contact Details Section
+    /* Contact Details Section */
 
     const contactHeading = screen.getByText("Contact Details");
     expect(contactHeading).toBeInTheDocument();
@@ -83,5 +77,69 @@ describe("Form Test", () => {
 
     expect(addressLabel).toBeInTheDocument();
     expect(addressPlaceholder).toBeInTheDocument();
+
+    /* Employee Status Section */
+
+    const esHeading = screen.getByText("Employee Status");
+    const subHeading = screen.getByText("What is contract type?");
+
+    expect(esHeading).toBeInTheDocument();
+    expect(subHeading).toBeInTheDocument();
+
+    // Contract Type
+
+    const permanentLabel = screen.getByText("Permanent");
+    const permanentValue = screen.getByDisplayValue("Permanent");
+
+    expect(permanentLabel).toBeInTheDocument();
+    expect(permanentValue).toBeInTheDocument();
+
+    const contractLabel = screen.getByText("Contract");
+    const contractValue = screen.getByDisplayValue("Contract");
+
+    expect(contractLabel).toBeInTheDocument();
+    expect(contractValue).toBeInTheDocument();
+
+    // Dates
+
+    const startDateLabel = screen.getByText("Start Date");
+    const endDateLabel = screen.getByText("End Date");
+
+    const dayCount = screen.getAllByText("Day");
+    const monthCount = screen.getAllByText("Month");
+    const yearCount = screen.getAllByText("Year");
+
+    expect(startDateLabel).toBeInTheDocument();
+    expect(endDateLabel).toBeInTheDocument();
+    expect(dayCount.length).toBe(2);
+    expect(monthCount.length).toBe(2);
+    expect(yearCount.length).toBe(2);
+
+    // on-Going
+
+    const onGoingLabel = screen.getByText("On-Going");
+
+    expect(onGoingLabel).toBeInTheDocument();
+
+    // Employment Type
+
+    const fullLabel = screen.getByText("Full-time");
+    const partLabel = screen.getByText("Part-time");
+
+    expect(fullLabel).toBeInTheDocument();
+    expect(partLabel).toBeInTheDocument();
+
+    // Hours
+
+    const hoursLabel = screen.getByText("Hours per week");
+    expect(hoursLabel).toBeInTheDocument();
+
+    // All
+
+    const checkboxes = screen.getAllByRole("checkbox");
+    expect(checkboxes.length).toEqual(5);
+
+    const values = screen.getAllByDisplayValue("");
+    expect(values.length).toBe(12);
   });
 });

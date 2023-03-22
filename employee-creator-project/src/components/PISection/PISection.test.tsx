@@ -44,14 +44,17 @@ describe("PISection Tests", () => {
     expect(firstNamePlaceholder).toBeInTheDocument();
 
     // Middle Name
+
     const middleNameLabel = screen.getByText("Middle name (if applicable)");
 
     expect(middleNameLabel).toBeInTheDocument();
 
     // Last Name
+
     const lastNameLabel = screen.getByText("Last name");
     const lastNamePlaceholder = screen.getByPlaceholderText("Smith");
     const values = screen.getAllByDisplayValue("");
+
     expect(lastNameLabel).toBeInTheDocument();
     expect(values.length).toBe(3);
     expect(lastNamePlaceholder).toBeInTheDocument();
