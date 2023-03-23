@@ -32,7 +32,10 @@ export const CDSection = ({ register, errors }: any) => {
           maxLength={10}
           defaultValue={edit ? selectEmployee.phoneNumber : ""}
           placeholder="04123456789"
-          {...register("phoneNumber", { required: true })}
+          {...register("phoneNumber", {
+            required: true,
+            pattern: /^[0-9]{10}$/,
+          })}
         ></input>
       </div>
       {errors.phoneNumber && (

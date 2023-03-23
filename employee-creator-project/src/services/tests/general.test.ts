@@ -16,13 +16,6 @@ describe("getYearsDifference Test", () => {
     expect(getYearsDifference(start, end)).toEqual(diff);
   });
 
-  it("should return an error for invalid input", () => {
-    const start = "";
-    const end = "2022-04-25";
-    const error = "NaN";
-    expect(getYearsDifference(start, end)).toEqual(error);
-  });
-
   it("should return the correct difference between starting and end date, with data passed in to combineStartDate and combineEndDate functions", () => {
     const start: any = combineStartDate({
       startDay: "01",
@@ -36,5 +29,17 @@ describe("getYearsDifference Test", () => {
     });
     const diff = "12.3";
     expect(getYearsDifference(start, end)).toEqual(diff);
+  });
+
+  it("should return an error for invalid input when one input is invalid", () => {
+    const start = "";
+    const end = "2022-04-25";
+    expect(getYearsDifference(start, end)).toEqual("NaN");
+  });
+
+  it("should return an error for invalid input when both inputs are invalid", () => {
+    const start: any = combineStartDate({});
+    const end: any = combineEndDate({});
+    expect(getYearsDifference(start, end)).toEqual("NaN");
   });
 });
