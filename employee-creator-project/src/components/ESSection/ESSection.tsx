@@ -107,7 +107,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
                 setValue("startDay", event.target.value);
               }}
               defaultValue={
-                edit ? selectEmployee.datesEmployed.split("-")[2] : ""
+                edit && selectEmployee.datesEmployed
+                  ? selectEmployee.datesEmployed.split("-")[2]
+                  : ""
               }
             ></input>
           </div>
@@ -117,7 +119,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
             <select
               {...register("startMonth", { required: true })}
               defaultValue={
-                edit ? selectEmployee.datesEmployed.split("-")[1] : "01"
+                edit && selectEmployee.datesEmployed
+                  ? selectEmployee.datesEmployed.split("-")[1]
+                  : "01"
               }
               onChange={(event) => {
                 setValue("startMonth", event.target.value);
@@ -146,7 +150,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
               max="3000"
               data-testid="startYear"
               defaultValue={
-                edit ? selectEmployee.datesEmployed.split("-")[0] : ""
+                edit && selectEmployee.datesEmployed
+                  ? selectEmployee.datesEmployed.split("-")[0]
+                  : ""
               }
               {...register("startYear", { required: true })}
               maxLength={4}
@@ -172,7 +178,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
                   max="31"
                   data-testid="endDay"
                   defaultValue={
-                    edit ? selectEmployee.datesEmployedEnd.split("-")[2] : ""
+                    edit && selectEmployee.datesEmployedEnd
+                      ? selectEmployee.datesEmployedEnd.split("-")[2]
+                      : ""
                   }
                   {...register("endDay", { required: true })}
                   onChange={(event) => {
@@ -187,7 +195,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
                   {...register("endMonth", { required: true })}
                   name="endMonth"
                   defaultValue={
-                    edit ? selectEmployee.datesEmployedEnd.split("-")[1] : "01"
+                    edit && selectEmployee.datesEmployedEnd
+                      ? selectEmployee.datesEmployedEnd.split("-")[1]
+                      : "01"
                   }
                   onChange={(event) => {
                     setValue("endMonth", event.target.value);
@@ -216,7 +226,9 @@ export const ESSection = ({ register, errors, setValue }: any) => {
                   max="3000"
                   data-testid="endYear"
                   defaultValue={
-                    edit ? selectEmployee.datesEmployedEnd.split("-")[0] : ""
+                    edit && selectEmployee.datesEmployedEnd
+                      ? selectEmployee.datesEmployedEnd.split("-")[0]
+                      : ""
                   }
                   {...register("endYear", { required: true })}
                   maxLength={4}

@@ -14,7 +14,7 @@ import { ButtonsContainer } from "../ButtonsContainer/ButtonsContainer";
 import { useSelector } from "react-redux";
 import { patchById } from "../../services/employee";
 
-const Form = () => {
+const Form: any = () => {
   const edit = useSelector((state: any) => state.form.edit);
   const selectEmployee = useSelector((state: any) => state.form.selectEmployee);
 

@@ -19,12 +19,12 @@ const renderCDSection = (register: any, errors: {}) => {
 
 const register = jest.fn();
 const errors = {
-  emai: "This field is required^",
-  phoneNumber: "This field is required^",
-  address: "This field is required^",
+  email: false,
+  phoneNumber: false,
+  address: false,
 };
 
-describe("CDSection test", () => {
+describe("CDSection tests", () => {
   test("It should render the CDSection and its content", () => {
     renderCDSection(register, errors);
 
@@ -56,11 +56,72 @@ describe("CDSection test", () => {
 
     expect(addressLabel).toBeInTheDocument();
     expect(addressPlaceholder).toBeInTheDocument();
+  });
 
-    // All
-
+  test("Should render no information if edit is false", () => {
+    renderCDSection(register, errors);
     const values = screen.getAllByDisplayValue("");
 
     expect(values.length).toBe(3);
+  });
+
+  test("Should return an error if errors.email is true (due to it being required)", () => {
+    renderCDSection(register, {
+      email: true,
+      phoneNumber: false,
+      address: false,
+    });
+    const error = screen.getByRole("emailError");
+    const errorMessage = screen.getByText("This field is required^");
+    expect(error).toBeInTheDocument();
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test("Should return an error if errors.phoneNumber is true (due to it being required)", () => {
+    renderCDSection(register, {
+      email: false,
+      phoneNumber: true,
+      address: false,
+    });
+    const error = screen.getByRole("phoneNumberError");
+    const errorMessage = screen.getByText(
+      "This field is required, only enter numbers^"
+    );
+    expect(error).toBeInTheDocument();
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test("Should return an error if errors.address is true (due to it being required)", () => {
+    renderCDSection(register, {
+      email: false,
+      phoneNumber: false,
+      address: true,
+    });
+    const error = screen.getByRole("addressError");
+    const errorMessage = screen.getByText("This field is required^");
+    expect(error).toBeInTheDocument();
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test("Should return multiple errors if errors are true (due to it being required)", () => {
+    renderCDSection(register, {
+      email: true,
+      phoneNumber: true,
+      address: true,
+    });
+    const emailError = screen.getByRole("emailError");
+    const phoneNumberError = screen.getByRole("phoneNumberError");
+    const addressError = screen.getByRole("addressError");
+
+    const errorMessage = screen.getAllByText("This field is required^");
+    const phoneErrorMessage = screen.getByText(
+      "This field is required, only enter numbers^"
+    );
+    expect(emailError).toBeInTheDocument();
+    expect(phoneNumberError).toBeInTheDocument();
+    expect(addressError).toBeInTheDocument();
+
+    expect(errorMessage.length).toBe(2);
+    expect(phoneErrorMessage).toBeInTheDocument();
   });
 });

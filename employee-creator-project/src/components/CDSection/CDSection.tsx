@@ -19,7 +19,9 @@ export const CDSection = ({ register, errors }: any) => {
         {...register("email", { required: true })}
       ></input>
       {errors.email && (
-        <p className={styles.error__message}>This field is required^</p>
+        <p role="emailError" className={styles.error__message}>
+          This field is required^
+        </p>
       )}
 
       <p>Mobile number</p>
@@ -39,7 +41,7 @@ export const CDSection = ({ register, errors }: any) => {
         ></input>
       </div>
       {errors.phoneNumber && (
-        <p className={styles.error__message}>
+        <p role="phoneNumberError" className={styles.error__message}>
           This field is required, only enter numbers^
         </p>
       )}
@@ -53,7 +55,9 @@ export const CDSection = ({ register, errors }: any) => {
         {...register("address", { required: true })}
       ></input>
       {errors.address && (
-        <p className={styles.error__message}>This field is required^</p>
+        <p role="addressError" className={styles.error__message}>
+          This field is required^
+        </p>
       )}
     </div>
   );

@@ -5,7 +5,7 @@ import { setEmployees, setClicked } from "../Redux/formSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 import { getAll } from "../../services/employee";
-const EmployeeList = () => {
+const EmployeeList: any = () => {
   const employees = useSelector((state: any) => state.form.employees);
 
   const { data } = useQuery("getEmployees", getAll);
@@ -28,7 +28,7 @@ const EmployeeList = () => {
       {employees &&
         employees.map((employee: any) => (
           <EmployeeCard
-            data-testid="EmployeeCard"
+            role="component"
             employee={employee}
             key={employee.id}
             filterRemove={filterRemove}

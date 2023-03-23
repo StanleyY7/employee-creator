@@ -18,7 +18,9 @@ const PISection = ({ register, errors }: any) => {
         {...register("firstName", { required: true })}
       ></input>
       {errors.firstName && (
-        <p className={styles.error__message}>This field is required^</p>
+        <p role="firstNameError" className={styles.error__message}>
+          This field is required^
+        </p>
       )}
 
       <p>Middle name (if applicable)</p>
@@ -37,7 +39,9 @@ const PISection = ({ register, errors }: any) => {
         {...register("lastName", { required: true })}
       ></input>
       {errors.lastName && (
-        <p className={styles.error__message}>This field is required^</p>
+        <p role="lastNameError" className={styles.error__message}>
+          This field is required^
+        </p>
       )}
     </div>
   );

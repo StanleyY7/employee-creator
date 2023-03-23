@@ -17,7 +17,17 @@ const renderESSection = (register: any, errors: {}, setValue: any) => {
   );
 };
 
-const errors = {};
+const errors = {
+  contractType: false,
+  startDay: false,
+  startMonth: false,
+  startYear: false,
+  endDay: false,
+  endMonth: false,
+  endYear: false,
+  employmentType: false,
+  hoursPW: false,
+};
 const register = jest.fn();
 const setValue = jest.fn();
 

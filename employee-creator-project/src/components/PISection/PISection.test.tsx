@@ -24,8 +24,8 @@ const renderPISection = (register: any, errors: {}) => {
 
 const register = jest.fn();
 const errors = {
-  firstName: "This field is required^",
-  lastName: "This field is required^",
+  firstName: false,
+  lastName: false,
 };
 
 describe("PISection Tests", () => {
@@ -58,5 +58,44 @@ describe("PISection Tests", () => {
     expect(lastNameLabel).toBeInTheDocument();
     expect(values.length).toBe(3);
     expect(lastNamePlaceholder).toBeInTheDocument();
+  });
+
+  test("Should return an error if errors.firstName is true (as it is required)", () => {
+    renderPISection(register, {
+      firstName: true,
+      lastName: false,
+    });
+
+    const error = screen.getByRole("firstNameError");
+    const errorMessage = screen.getByText("This field is required^");
+    expect(error).toBeInTheDocument();
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test("Should return an error if errors.lastName is true (as it is required)", () => {
+    renderPISection(register, {
+      firstName: false,
+      lastName: true,
+    });
+
+    const error = screen.getByRole("lastNameError");
+    const errorMessage = screen.getByText("This field is required^");
+    expect(error).toBeInTheDocument();
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test("Should return multiple errors if errors is true (as it is required)", () => {
+    renderPISection(register, {
+      firstName: true,
+      lastName: true,
+    });
+    const firstNameError = screen.getByRole("firstNameError");
+    const lastNameError = screen.getByRole("lastNameError");
+
+    const errorMessage = screen.getAllByText("This field is required^");
+
+    expect(firstNameError).toBeInTheDocument();
+    expect(lastNameError).toBeInTheDocument();
+    expect(errorMessage.length).toBe(2);
   });
 });

@@ -7,13 +7,14 @@ import EmployeeList from "./EmployeeList";
 
 import "@testing-library/jest-dom/extend-expect";
 import { QueryClientProvider } from "react-query";
+import { employeeData } from "../../services/tests/employee.test";
 
-const renderEmployeeList = () => {
+const renderEmployeeList = (employees: any) => {
   render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <MemoryRouter>
-          <EmployeeList />
+          <EmployeeList employees={employees} />
         </MemoryRouter>
       </Provider>
     </QueryClientProvider>
@@ -22,10 +23,10 @@ const renderEmployeeList = () => {
 
 describe("EmployeeList test", () => {
   test("EmployeeList should not render EmployeeCard if no data", async () => {
-    renderEmployeeList();
+    renderEmployeeList(employeeData);
 
     await waitFor(() => {
-      const EmployeeCard = screen.queryByTestId("EmployeeCard");
+      const EmployeeCard = screen.queryByRole("component");
       expect(EmployeeCard).toBeNull();
     });
   });

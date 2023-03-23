@@ -1,17 +1,10 @@
 import generalStyles from "../../App.module.scss";
 import styles from "./CreateEmployeePage.module.scss";
-import { useEffect } from "react";
+
 import BackButton from "../../components/BackButton/BackButton";
 import Form from "../../components/Form/Form";
-import { useDispatch } from "react-redux";
-import { setEdit } from "../../components/Redux/formSlice";
 
 const CreateEmployeePage = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setEdit(false));
-  }, []);
-
   return (
     <>
       <div>

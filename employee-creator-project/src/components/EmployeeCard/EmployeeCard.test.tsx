@@ -1,5 +1,5 @@
 import { MemoryRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { employeeData } from "../../services/tests/employee.test";
 import { getYearsDifference } from "../../services/general";
 import { Provider } from "react-redux";
@@ -37,5 +37,14 @@ describe("EmployeeCard Test", () => {
     expect(contractAndLength).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(navLink).toBeInTheDocument();
+  });
+
+  test("When link is pressed it changes edit state and selectEmployee state onClick", () => {
+    renderEmployeeCard();
+    const navLink = screen.getByRole("link");
+    fireEvent.click(navLink);
+    const state = store.getState().form;
+    expect(state.edit).toBe(true);
+    expect(state.selectEmployee).toBe(employeeData);
   });
 });
