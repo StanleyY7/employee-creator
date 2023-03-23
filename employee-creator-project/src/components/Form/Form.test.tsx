@@ -7,19 +7,23 @@ import Form from "./Form";
 
 import "@testing-library/jest-dom/extend-expect";
 
-const renderForm = () => {
+const renderForm = (errors: {}) => {
   render(
     <Provider store={store}>
       <MemoryRouter>
-        <Form />
+        <Form errors={errors} />
       </MemoryRouter>
     </Provider>
   );
 };
 
+const errors = {
+  email: true,
+};
+
 describe("Form Test", () => {
   test("Form should render with components", () => {
-    renderForm();
+    renderForm(errors);
 
     /* Personal Information Section */
 

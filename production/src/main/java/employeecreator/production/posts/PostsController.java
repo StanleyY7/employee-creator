@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5173/")
+@CrossOrigin(origins = {"http://127.0.0.1:5173/", "http://localhost:8080", "http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5174/"})
 @RequestMapping("/posts")
 public class PostsController {
 	

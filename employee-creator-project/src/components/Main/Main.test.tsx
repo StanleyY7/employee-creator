@@ -1,7 +1,8 @@
 import Main from "./Main";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import { MemoryRouter } from "react-router-dom";
+
+import "@testing-library/jest-dom/extend-expect";
 
 const renderMain = () => {
   render(

@@ -18,9 +18,9 @@ export const combineStartDate = (data: any) => {
 };
 
 export const combineEndDate = (data: any) => {
-  const day = data.endDay ?? "current";
-  const month = data.endMonth ?? "current";
-  const year = data.endYear ?? "current";
+  const day = data.endDay ?? "";
+  const month = data.endMonth ?? "";
+  const year = data.endYear ?? "";
 
   const date = new Date(`${year}-${month}-${day}`);
   return date;

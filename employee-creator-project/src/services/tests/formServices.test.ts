@@ -10,6 +10,11 @@ describe("combineStartDate Tests", () => {
     const dateString = new Date("1990-01-01");
     expect(combineStartDate(data)).toEqual(dateString);
   });
+
+  it("should return an error for invalid input", () => {
+    const data = {};
+    expect(combineStartDate(data).getTime()).toEqual(NaN);
+  });
 });
 
 describe("combineEndDate Tests", () => {
@@ -21,5 +26,10 @@ describe("combineEndDate Tests", () => {
     };
     const dateString = new Date("2000-05-01");
     expect(combineEndDate(data)).toEqual(dateString);
+  });
+
+  it("should return an error for invalid input", () => {
+    const data = {};
+    expect(combineEndDate(data).getTime()).toEqual(NaN);
   });
 });

@@ -83,6 +83,19 @@ describe("getAll Test", () => {
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(data).toEqual(mockResponse);
   });
+
+  it("should fetch data and return nothing if no data in the backend", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      json: jest.fn().mockResolvedValue({}),
+    });
+
+    const data = await getAll();
+
+    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/posts");
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(data).toEqual({});
+  });
 });
 
 // POST

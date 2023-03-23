@@ -6,7 +6,11 @@ export const ButtonsContainer = () => {
     <>
       <div>
         <div className={styles.Form__buttonContainer}>
-          <input type="submit" className={styles.Form__saveButton} />
+          <input
+            data-testid="submit"
+            type="submit"
+            className={styles.Form__saveButton}
+          />
           <NavLink to="/all-employees">
             <button className={styles.Form__cancelButton}>Cancel</button>
           </NavLink>

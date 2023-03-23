@@ -19,7 +19,9 @@ export const CDSection = ({ register, errors }: any) => {
         {...register("email", { required: true })}
       ></input>
       {errors.email && (
-        <p className={styles.error__message}>This field is required^</p>
+        <p role="emailError" className={styles.error__message}>
+          This field is required^
+        </p>
       )}
 
       <p>Mobile number</p>
@@ -32,11 +34,14 @@ export const CDSection = ({ register, errors }: any) => {
           maxLength={10}
           defaultValue={edit ? selectEmployee.phoneNumber : ""}
           placeholder="04123456789"
-          {...register("phoneNumber", { required: true })}
+          {...register("phoneNumber", {
+            required: true,
+            pattern: /^[0-9]{10}$/,
+          })}
         ></input>
       </div>
       {errors.phoneNumber && (
-        <p className={styles.error__message}>
+        <p role="phoneNumberError" className={styles.error__message}>
           This field is required, only enter numbers^
         </p>
       )}
@@ -50,7 +55,9 @@ export const CDSection = ({ register, errors }: any) => {
         {...register("address", { required: true })}
       ></input>
       {errors.address && (
-        <p className={styles.error__message}>This field is required^</p>
+        <p role="addressError" className={styles.error__message}>
+          This field is required^
+        </p>
       )}
     </div>
   );
