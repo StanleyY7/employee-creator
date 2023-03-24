@@ -3,7 +3,7 @@ import { FormTypes } from "../types/form";
 // GET
 
 export const getAll = async () => {
-  const response = await fetch("http://localhost:8080/posts");
+  const response = await fetch("http://localhost:8080/employees");
   const data = await response.json();
   console.log(data);
   return data;
@@ -12,7 +12,7 @@ export const getAll = async () => {
 // POST
 export const postEmployee = async (newEmployee: FormTypes) => {
   try {
-    const postData = await fetch("http://localhost:8080/posts", {
+    const postData = await fetch("http://localhost:8080/employees", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const patchById = async (data: any) => {
   if (!data.id) {
     throw new Error("Id not found");
   }
-  const response = await fetch(`http://localhost:8080/posts/${data.id}`, {
+  const response = await fetch(`http://localhost:8080/employees/${data.id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export const patchById = async (data: any) => {
 
 // DELETE
 export const deleteById = async (id: any) => {
-  const response = await fetch("http://localhost:8080/posts/" + id, {
+  const response = await fetch("http://localhost:8080/employees/" + id, {
     method: "DELETE",
   });
   if (response.ok) {
