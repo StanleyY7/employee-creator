@@ -1,6 +1,6 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, act, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "../../components/Redux/Store";
 
 import { QueryClientProvider } from "react-query";
@@ -15,9 +15,9 @@ const renderCreateEmployeePage = async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <MemoryRouter>
+          <BrowserRouter>
             <CreateEmployeePage />
-          </MemoryRouter>
+          </BrowserRouter>
         </Provider>
       </QueryClientProvider>
     );
@@ -35,5 +35,23 @@ describe("createEmployeePage Test", () => {
     const link = screen.getAllByRole("link");
     expect(backButton).toBeInTheDocument();
     expect(link.length).toBe(2);
+  });
+
+  test("When back button is clicked it should take the user back to /all-employees", () => {
+    renderCreateEmployeePage();
+
+    const link = screen.getAllByRole("link");
+
+    fireEvent.click(link[0]);
+    expect(window.location.pathname).toEqual("/all-employees");
+  });
+
+  test("When cancel button is clicked it should take the user back to /all-employees", () => {
+    renderCreateEmployeePage();
+
+    const link = screen.getAllByRole("link");
+
+    fireEvent.click(link[1]);
+    expect(window.location.pathname).toEqual("/all-employees");
   });
 });

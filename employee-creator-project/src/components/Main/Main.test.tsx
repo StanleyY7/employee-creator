@@ -1,14 +1,14 @@
 import Main from "./Main";
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 
 import "@testing-library/jest-dom/extend-expect";
 
 const renderMain = () => {
   render(
-    <MemoryRouter>
+    <BrowserRouter>
       <Main />
-    </MemoryRouter>
+    </BrowserRouter>
   );
 };
 
@@ -19,5 +19,17 @@ describe("Main Test", () => {
     const navLink = screen.getByRole("link");
     expect(heading).toBeInTheDocument();
     expect(navLink).toBeInTheDocument();
+  });
+
+  test("Clicking on the button/link will take the user to /all-employees", () => {
+    renderMain();
+
+    const navLink = screen.getByRole("link");
+
+    expect(navLink).toBeInTheDocument();
+
+    fireEvent.click(navLink);
+
+    expect(window.location.pathname).toEqual("/all-employees");
   });
 });

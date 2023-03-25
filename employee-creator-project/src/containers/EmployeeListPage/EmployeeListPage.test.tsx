@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, act } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../../components/Redux/Store";
 
@@ -14,9 +14,9 @@ const renderEmployeeListPage = async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <MemoryRouter>
+          <BrowserRouter>
             <EmployeeListPage />
-          </MemoryRouter>
+          </BrowserRouter>
         </Provider>
       </QueryClientProvider>
     );
@@ -48,5 +48,15 @@ describe("EmployeeListPage Test", () => {
 
     const state = store.getState().form;
     expect(state.edit).toBe(false);
+  });
+
+  test("When Add Employee button is clicked it should navigate the user to /add-employee", () => {
+    renderEmployeeListPage();
+
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(window.location.pathname).toEqual("/add-employee");
   });
 });

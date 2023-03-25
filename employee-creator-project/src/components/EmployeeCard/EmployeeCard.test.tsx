@@ -1,4 +1,4 @@
-import { MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { employeeData } from "../../services/tests/employee.test";
 import { getYearsDifference } from "../../services/general";
@@ -12,9 +12,9 @@ import "@testing-library/jest-dom/extend-expect";
 const renderEmployeeCard = () => {
   render(
     <Provider store={store}>
-      <MemoryRouter>
+      <BrowserRouter>
         <EmployeeCard employee={employeeData} />
-      </MemoryRouter>
+      </BrowserRouter>
     </Provider>
   );
 };
@@ -46,5 +46,12 @@ describe("EmployeeCard Test", () => {
     const state = store.getState().form;
     expect(state.edit).toBe(true);
     expect(state.selectEmployee).toBe(employeeData);
+  });
+
+  test("When link is pressed it navigates the user to /edit-employee", () => {
+    renderEmployeeCard();
+    const navLink = screen.getByRole("link");
+    fireEvent.click(navLink);
+    expect(window.location.pathname).toEqual("/edit-employee");
   });
 });

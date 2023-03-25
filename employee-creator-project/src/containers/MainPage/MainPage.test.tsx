@@ -1,13 +1,13 @@
 import MainPage from "./MainPage";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 const renderMainPage = () => {
   render(
-    <MemoryRouter>
+    <BrowserRouter>
       <MainPage />
-    </MemoryRouter>
+    </BrowserRouter>
   );
 };
 
@@ -18,5 +18,17 @@ describe("MainPage Test", () => {
     const navLink = screen.getByRole("link");
     expect(heading).toBeInTheDocument();
     expect(navLink).toBeInTheDocument();
+  });
+
+  test("Clicking on the button/link will take the user to /all-employees", () => {
+    renderMainPage();
+
+    const navLink = screen.getByRole("link");
+
+    expect(navLink).toBeInTheDocument();
+
+    fireEvent.click(navLink);
+
+    expect(window.location.pathname).toEqual("/all-employees");
   });
 });

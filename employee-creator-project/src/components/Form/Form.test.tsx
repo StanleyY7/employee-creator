@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { store } from "../Redux/Store";
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 
 import Form from "./Form";
 
@@ -10,9 +10,9 @@ import "@testing-library/jest-dom/extend-expect";
 const renderForm = (errors: {}) => {
   render(
     <Provider store={store}>
-      <MemoryRouter>
+      <BrowserRouter>
         <Form errors={errors} />
-      </MemoryRouter>
+      </BrowserRouter>
     </Provider>
   );
 };
@@ -145,5 +145,16 @@ describe("Form Test", () => {
 
     const values = screen.getAllByDisplayValue("");
     expect(values.length).toBe(12);
+
+    const link = screen.getByRole("link");
+    expect(link).toBeInTheDocument();
+  });
+
+  test("clicking on the cancel button/link will take the user back to /all-employees", () => {
+    renderForm(errors);
+    const link = screen.getByRole("link");
+    expect(link).toBeInTheDocument();
+    fireEvent.click(link);
+    expect(window.location.pathname).toEqual("/all-employees");
   });
 });
