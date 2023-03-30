@@ -73,7 +73,7 @@ We were given design snippets (below) for the frontend with how we create/struct
 - Post, Patch, Delete and Get of employee data.
 - Spring API backend.
 - React + TypeScript and SCSS for the frontend.
-- Testing
+- Testing (Over 100 tests)
 
 #### To be implemented
 
