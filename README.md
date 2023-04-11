@@ -52,6 +52,7 @@ This project involved creating a Full-Stack employee creator application using S
 - React Hook Forms: To have more control over validation and to simplify form state and form submission.
 - Spring Test: To test the backend which is in a Spring environment, to ensure that the backend is functional and meets the requirements of the project.
 - Postman: To manually test the backend by making requests to it to ensure it was working.
+- Docker: To "dockerize" the project so that it can be easily deployed and to ensure it will work on multiple systems by setting the default environment/s of the docker container/s the project runs in. 
 
 ## MVP
 
@@ -74,6 +75,7 @@ We were given design snippets (below) for the frontend with how we create/struct
 - Spring API backend.
 - React + TypeScript and SCSS for the frontend.
 - Testing (Over 100 tests)
+- Dockerized Backend
 
 #### To be implemented
 
