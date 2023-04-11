@@ -1,16 +1,33 @@
+version: 1
 services:
-  - name: server
+  - type: web
+    name: server
+    env: docker
     image: employee-creator-backend:latest
-    env:
-      - spring.datasource.url=jdbc:mysql://mysqldb:3306/employee_creator_backend
     ports:
-      - 8080
-    depends_on:
-      - mysqldb
-  - name: mysqldb
+      - "8080:8080"
+    envVars:
+      - key: spring.datasource.url
+        value: jdbc:mysql://mysqldb:3306/employee_creator_backend
+    networks:
+      - name: springmysql-net
+
+  - type: pserv
+    name: mysqldb
+    env: docker
     image: mysql:latest
-    env:
-      - MYSQL_ROOT_PASSWORD=Powerade123!
-      - MYSQL_DATABASE=employee_creator_backend
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=Powerade123!
+    networks:
+      - name: springmysql-net
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: Powerade123!
+      - key: MYSQL_DATABASE
+        value: employee_creator_backend
+      - key: MYSQL_USER
+        value: admin
+      - key: MYSQL_PASSWORD
+        value: Powerade123!
+
+networks:
+  - name: springmysql-net
+
