@@ -1,0 +1,16 @@
+services:
+  - name: server
+    image: employee-creator-backend:latest
+    env:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/employee_creator_backend
+    ports:
+      - 8080
+    depends_on:
+      - mysqldb
+  - name: mysqldb
+    image: mysql:latest
+    env:
+      - MYSQL_ROOT_PASSWORD=Powerade123!
+      - MYSQL_DATABASE=employee_creator_backend
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=Powerade123!
