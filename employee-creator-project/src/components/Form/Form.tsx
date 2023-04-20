@@ -25,7 +25,7 @@ const Form: any = () => {
     formState: { errors },
   } = useForm<FormTypes>();
 
-  const onEditData = (data: any) => {
+  const onEditData = (data: FormTypes) => {
     const cleanedData = {
       id: selectEmployee.id,
       firstName: data.firstName,

@@ -1,3 +1,5 @@
+import { employees } from "./general";
+
 export type FormTypes = {
   id: number;
   firstName: string;
@@ -13,7 +15,7 @@ export type FormTypes = {
   endDay: string;
   endMonth: string;
   endYear: string;
-  onGoing: true | false;
+  onGoing: boolean;
   employmentType: string;
   hoursPW: Number;
   datesEmployed: Number | string;
