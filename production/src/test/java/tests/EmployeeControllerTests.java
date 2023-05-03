@@ -46,7 +46,7 @@ public class EmployeeControllerTests {
     }
     @Test
     public void testGetStatus() throws Exception {
-        mockMvc.perform(get("/employees"))
+        mockMvc.perform(get("/api/employees"))
                 .andExpect(status().isOk());
 
     }
