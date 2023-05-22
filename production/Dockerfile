@@ -1,13 +1,17 @@
-FROM openjdk:17
-COPY target/production.jar .
-COPY src/main/resources/https-employee-backend.jks .
+FROM maven:3.8.4-openjdk-17 as builder
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-ENV SERVER_PORT=8080
-ENV SERVER_SSL_KEY_ALIAS=https-employee-backend
-ENV SERVER_SSL_KEY_STORE=./https-employee-backend.jks
-ENV SERVER_SSL_KEY_STORE_TYPE=JKS
-ENV SERVER_SSL_KEY_STORE_PASSWORD=testing123!
-ENV SERVER_SSL_KEY_PASSWORD=testing123!
+COPY src ./src
+RUN mvn package -DskipTests
 
+# Second stage: Run the Spring application
+FROM eclipse-temurin:17
+
+WORKDIR /app
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "production.jar"]
+
+COPY --from=builder /app/target/production.jar .
+
+CMD ["java", "-jar", "production.jar"]

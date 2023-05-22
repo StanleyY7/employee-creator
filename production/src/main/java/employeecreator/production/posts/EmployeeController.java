@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = {"http://127.0.0.1:5173/", "http://localhost:8080", "http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5174/"})
-@RequestMapping("/api/employees")
+@CrossOrigin(origins = {"http://127.0.0.1:5173/", "http://127.0.0.1:5000/", "http://localhost:5000", "http://localhost:8080", "http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5174/"})
+@RequestMapping("/employees")
 public class EmployeeController {
 	
 	@Autowired
