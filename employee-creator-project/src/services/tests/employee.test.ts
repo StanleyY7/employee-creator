@@ -79,7 +79,7 @@ describe("getAll Test", () => {
 
     const data = await getAll();
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/api/employees");
+    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/employees");
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(data).toEqual(mockResponse);
   });
@@ -92,7 +92,7 @@ describe("getAll Test", () => {
 
     const data = await getAll();
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/api/employees");
+    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/employees");
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(data).toEqual({});
   });
@@ -110,7 +110,7 @@ describe("postEmployee Tests", () => {
     });
     await postEmployee(employeeData);
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/api/employees", {
+    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/employees", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -180,7 +180,7 @@ describe("deleteById Test", () => {
 
     expect(result).toBe(true);
     expect(fetch).toHaveBeenCalledWith(
-      `http://localhost:8080/api/employees/${idToDelete}`,
+      `http://localhost:8080/employees/${idToDelete}`,
       {
         method: "DELETE",
       }

@@ -32,7 +32,6 @@ services:
     image: mysql:latest
     environment:
       MYSQL_DATABASE: employee_creator_backend
-      MYSQL_USER: root
       MYSQL_PASSWORD: Powerade123!
       MYSQL_ROOT_PASSWORD: Powerade123!
     ports:
