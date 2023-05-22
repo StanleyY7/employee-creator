@@ -35,7 +35,7 @@ services:
       MYSQL_PASSWORD: Powerade123!
       MYSQL_ROOT_PASSWORD: Powerade123!
     ports:
-      - "3307:3306"
+      - "3308:3306"
     volumes:
       - ./production/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database/mysql-data:/var/lib/mysql
@@ -48,6 +48,8 @@ services:
       context: ./employee-creator-project
     ports:
       - "5173:5173"
+    expose:
+      - 5173
     volumes:
       - ./employee-creator-project:/app
       - /app/node_modules
