@@ -75,10 +75,9 @@ We were given design snippets (below) for the frontend with how we create/struct
 - Spring API backend.
 - React + TypeScript and SCSS for the frontend.
 - Testing (Over 100 tests)
-- Dockerized Backend
-- Deployed backend by using Oracle Cloud (created a Virtual Machine that runs on Linux (this acts as a remote server), configured Security List with relevant Ingress rules to expose a port to listen for requests and a port that accepts ssh login attempts, installed Docker, installed docker-compose to run docker-compose commands from the remote server, transferred docker-compose file via scp, pulled employee-creator-backend:latest image from docker hub, runs and works however it is served via http and so in the process of converting it into https by installing ssl/tsl certifcate into web server and configuring accordingly).
+- Dockerized entire application via docker-compose, I have it running on an Oracle VM (I ssh into it from my host computer, I then transferred files across via SCP. In terminal of the VM I installed docker and other extensions to have it run, I then ran docker commands in the VM to have it run "forever"), everything works except for the frontend on the VM (as Linux environment so have to set permissions), error encountered with permissions. Working to resolve. 
 
 #### To be implemented
 
-- Live hosting/deployment of frontend (I have deployed on netlify however runs into http error as backend needs to be https).
+- Live hosting/deployment of frontend.
 
