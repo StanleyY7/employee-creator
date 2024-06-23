@@ -1,4 +1,9 @@
 # Employee Creator Project (Full Stack)
+
+Link (frontend) -> https://6677acce83621c2f97373b47--dainty-biscochitos-60d450.netlify.app/all-employees 
+
+Link (backend) -> https://ec-backend-gqyr.onrender.com/employees
+
 ![employeeCreator](https://user-images.githubusercontent.com/119549394/226088729-ffbcc9da-c0d4-4c2e-93ef-b76334b3ffce.png)
 
 <span>  <img width="250" src="https://github.com/StanleyY7/employee-creator/actions/workflows/spring-backend.yml/badge.svg"/> <img width="250" src="https://github.com/StanleyY7/employee-creator/actions/workflows/main.yml/badge.svg"/></span>
@@ -74,10 +79,11 @@ We were given design snippets (below) for the frontend with how we create/struct
 - Post, Patch, Delete and Get of employee data.
 - Spring API backend.
 - React + TypeScript and SCSS for the frontend.
-- Testing (Over 100 tests)
-- Dockerized entire application via docker-compose, I have it running on an Oracle VM (I ssh into it from my host computer, I then transferred files across via SCP. In terminal of the VM I installed docker and other extensions to have it run, I then ran docker commands in the VM to have it run "forever"), everything works except for the frontend on the VM (as Linux environment so have to set permissions), error encountered with permissions. Working to resolve. 
+- Testing (Over 100 tests).
+- Deployed backend by using onRender (web service connected to docker hub image, docker hub image is running jar file of backend, MySql database is hosted on a third party cloud database provider).
+- Deployed frontend on netlify.
 
 #### To be implemented
 
-- Live hosting/deployment of frontend.
+- Live hosting/deployment of frontend (DONE).
 
