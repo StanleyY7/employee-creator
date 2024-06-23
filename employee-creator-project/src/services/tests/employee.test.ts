@@ -79,7 +79,9 @@ describe("getAll Test", () => {
 
     const data = await getAll();
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/employees");
+    expect(fetch).toHaveBeenCalledWith(
+      "https://ec-backend-gqyr.onrender.com/employees"
+    );
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(data).toEqual(mockResponse);
   });
@@ -92,7 +94,9 @@ describe("getAll Test", () => {
 
     const data = await getAll();
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/employees");
+    expect(fetch).toHaveBeenCalledWith(
+      "https://ec-backend-gqyr.onrender.com/employees"
+    );
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(data).toEqual({});
   });
@@ -110,13 +114,16 @@ describe("postEmployee Tests", () => {
     });
     await postEmployee(employeeData);
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/employees", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(employeeData),
-    });
+    expect(fetch).toHaveBeenCalledWith(
+      "https://ec-backend-gqyr.onrender.com/employees",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(employeeData),
+      }
+    );
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith("Success!");
     expect(logSpy).toHaveBeenCalledWith(mockResponse);
@@ -180,7 +187,7 @@ describe("deleteById Test", () => {
 
     expect(result).toBe(true);
     expect(fetch).toHaveBeenCalledWith(
-      `http://localhost:8080/employees/${idToDelete}`,
+      `https://ec-backend-gqyr.onrender.com/employees/${idToDelete}`,
       {
         method: "DELETE",
       }
