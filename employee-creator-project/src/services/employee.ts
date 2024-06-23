@@ -28,7 +28,7 @@ export const postEmployee = async (newEmployee: FormTypes) => {
       const response = await postData.json();
       console.log(response);
       alert("Success!");
-      window.location.href = window.location.href;
+      window.location.href = "/all-employees";
     } else {
       alert("unable to submit");
     }
